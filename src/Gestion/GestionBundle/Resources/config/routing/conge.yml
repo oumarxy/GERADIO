@@ -1,0 +1,40 @@
+conge:
+    path:     /{idemp}/
+    defaults: { _controller: "GestionBundle:Conge:index" }
+    requirements:
+        idemp: \d+
+
+conge_show:
+    path:     /{id}/show
+    defaults: { _controller: "GestionBundle:Conge:show" }
+
+conge_pdf:
+    path:     /{idemp}/{idconge}/conge_pdf
+    defaults: { _controller: "GestionBundle:Conge:conge_pdf" }
+
+conge_new:
+    path:     /{idemp}/new
+    defaults: { _controller: "GestionBundle:Conge:new" }
+    requirements:
+        idemp: \d+
+
+conge_create:
+    path:      /{idemp}/create
+    defaults: { _controller: "GestionBundle:Conge:create" }
+    methods:  POST
+    requirements:
+        idemp: \d+
+
+conge_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "GestionBundle:Conge:edit" }
+
+conge_update:
+    path:     /{id}/update
+    defaults: { _controller: "GestionBundle:Conge:update" }
+    methods:  [POST, PUT]
+
+conge_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "GestionBundle:Conge:delete" }
+    methods:  [POST, DELETE]

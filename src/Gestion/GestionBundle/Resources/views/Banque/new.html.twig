@@ -1,0 +1,124 @@
+{% extends 'GestionBundle::layout_gestion.html.twig' %}
+
+{% block container_gestion %}
+    <h1>Validation de salaire</h1>
+    <div class="row">
+        <form method="post" action="{{path('banque_create', {'idemp':employe.id})}}">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Mode paiement</label>
+                    
+                        <select id="libbanque" name="libbanque" class="form-control" >
+                            <option value="">select</option>
+                            <option value="Caisse">Caisse</option>
+                            <option value="Banque">Banque</option>
+                        </select>
+                    
+                </div>   
+                <div class="form-group">
+                    <label>Date Début</label>
+                    <input type="text" name="datedebut" required="required" class="form-control datetimepicker"> 
+                </div>   
+                <div class="form-group">
+                    <label>Date Fin</label>
+                    <input type="text" id="datefin" name="datefin" required="required" class="form-control datetimepicker">
+                </div>   
+                <input type="submit" value="Valider" class="btn btn-success" />
+
+            </div>
+            <div class="col-md-6">
+
+                <table class="table table-striped table-hover">
+
+                    <tr class="heading bg-blue">
+                        <th width="10%"></th>
+                        <th width="10%">Composante</th>
+                        <th width="20%">Taux</th>
+                        <th width="20%">Gains</th>
+                        <th width="20%">Retenues</th>
+                    </tr>
+                    {% set totalR = 0 %}
+                    {% set totalG = 0 %}
+                    {% for compo in tableauCompo %}  
+                        <tr class="even pointer" >
+                            <td class="a-center "><input type="checkbox" checked="checked" name="compo{{ compo.id }}" /></td>
+                            <td>{{ compo.composante }}</td>
+                            <td>{{ compo.taux }} </td>	
+                            {% if compo.taux > 0 %}  
+                                {% set quota = (employe.salbase * compo.taux)/100 %}
+                                {% if compo.type=='retenue' %}  
+                                    <td></td>							 
+                                    <td> {{ quota }}</td>
+                                    {% set totalR = totalR + quota %}
+                                {% else %} 
+                                    <td>{{ quota }}</td>
+                                    <td></td>								 
+                                    {% set totalG = totalG + quota %}								 
+                                {% endif %}
+                            {% else %}
+                                {% if compo.type=='retenue'  %} 
+                                    {% set quota = compo.montant %}	
+                                    <td></td>
+                                    <td>{{ quota }}</td>	
+                                    {% set totalR = totalR + quota %}								 
+                                {% else %}
+                                    {% set quota = compo.montant %}	
+                                    <td>{{ quota }}</td>
+                                    <td></td>								 
+                                    {% set totalG = totalG + quota %}	
+                                {% endif %}
+                            {% endif %}
+
+                        </tr>
+
+                    {% endfor %}
+                    <br />
+                </table>
+                <table class="pull-right">
+
+
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td ></td>
+                        <td></td>
+                        <td></td>	
+                    </tr>
+                    <tr>
+
+                        <td colspan="2">Total Gain:</td>
+                        <td></td>
+                        <td colspan="2">{{ totalG }}</td>
+                    </tr>
+                    <tr>
+
+                        <td colspan="2">Total Retenue:</td>
+                        <td></td>
+                        <td colspan="2"> {{ totalR }}</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>					
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr >
+                        {% set salaire = employe.salbase - totalR + totalG %}
+
+                        <td  colspan="2">Salaire Net</td>
+                        <td width="20%"></td>
+                        <td  colspan="2">{{ salaire }}</td>
+                    </tr>
+                </table>
+            </div>
+        </form>
+
+    </div>
+
+
+    <a class="btn btn-primary pull-right" href="{{ path('banque', { 'idemp': employe.id }) }}">
+        Retour
+    </a>
+
+{% endblock %}

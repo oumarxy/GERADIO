@@ -1,0 +1,15 @@
+{% extends '::layout/layout_app.html.twig' %}
+
+
+{% block container_app %}  
+    <div class="content-wrapper">
+        <section class="content">            
+            {% block container_member %}                 
+                        {% block fos_user_content %} {% endblock fos_user_content %}                        
+            {% endblock container_member %} 
+        </section>
+    </div>
+{% endblock container_app %}
+
+
+

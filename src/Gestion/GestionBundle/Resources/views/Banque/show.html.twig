@@ -1,0 +1,52 @@
+{% extends 'GestionBundle::layout_gestion.html.twig' %}
+
+{% block container_gestion %}
+    <h1>Banque</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Libbanque</th>
+                <td>{{ entity.libbanque }}</td>
+            </tr>
+            <tr>
+                <th>Libagence</th>
+                <td>{{ entity.libagence }}</td>
+            </tr>
+            <tr>
+                <th>Rib</th>
+                <td>{{ entity.rib }}</td>
+            </tr>
+            <tr>
+                <th>Salbase</th>
+                <td>{{ entity.salbase }}</td>
+            </tr>
+            <tr>
+                <th>Salbrut</th>
+                <td>{{ entity.salbrut }}</td>
+            </tr>
+            <tr>
+                <th>Salnet</th>
+                <td>{{ entity.salnet }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('banque', { 'idemp': entity.employe.id }) }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('banque_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

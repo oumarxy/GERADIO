@@ -1,0 +1,148 @@
+<?php
+
+namespace Ventes\VentesBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * DetailsOptions
+ *
+ * @ORM\Table()
+ * @ORM\Entity(repositoryClass="Ventes\VentesBundle\Repository\DetailsOptionsRepository")
+ */
+class DetailsOptions {
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="refProd", type="string", length=10)
+     */
+    private $refOption;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="libelle", type="string", length=255)
+     */
+    private $libelle;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="prixHT", type="float")
+     */
+    private $prixHT;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Ventes\VentesBundle\Entity\Facture", inversedBy="detailsOptions", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $facture;
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId() {
+        return $this->id;
+    }
+
+    /**
+     * Set refOption
+     *
+     * @param string $refOption
+     * @return DetailsOptions
+     */
+    public function setRefOption($refOption) {
+        $this->refOption = $refOption;
+
+        return $this;
+    }
+
+    /**
+     * Get refOption
+     *
+     * @return string 
+     */
+    public function getRefOption() {
+        return $this->refOption;
+    }
+
+    /**
+     * Set libelle
+     *
+     * @param string $libelle
+     * @return DetailsOptions
+     */
+    public function setLibelle($libelle) {
+        $this->libelle = $libelle;
+
+        return $this;
+    }
+
+    /**
+     * Get libelle
+     *
+     * @return string 
+     */
+    public function getLibelle() {
+        return $this->libelle;
+    }
+
+    /**
+     * Set prixHT
+     *
+     * @param float $prixHT
+     * @return DetailsOptions
+     */
+    public function setPrixHT($prixHT) {
+        $this->prixHT = $prixHT;
+
+        return $this;
+    }
+
+    /**
+     * Get prixHT
+     *
+     * @return float 
+     */
+    public function getPrixHT() {
+        return $this->prixHT;
+    }
+
+    /**
+     * Set facture
+     *
+     * @param \Ventes\VentesBundle\Entity\Facture $facture
+     * @return DetailsOptions
+     */
+    public function setFacture(\Ventes\VentesBundle\Entity\Facture $facture) {
+        $this->facture = $facture;
+
+        return $this;
+    }
+
+    /**
+     * Get facture
+     *
+     * @return \Ventes\VentesBundle\Entity\Facture 
+     */
+    public function getFacture() {
+        return $this->facture;
+    }
+
+    public function __toString() {
+        return $this->getLibelle();
+    }
+
+}

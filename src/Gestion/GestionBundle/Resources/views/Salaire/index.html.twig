@@ -1,0 +1,45 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Liste de salaires</h1>
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Periode</th>
+                <th>Salaire Net</th>
+                <th>Total gain</th>
+                <th>Total retenue</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('salaire_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.periode }}</td>
+                <td>{{ entity.salairenet }}</td>
+                <td>{{ entity.totalgain }}</td>
+                <td>{{ entity.totalretenue }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('salaire_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('salaire_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+      
+        <a class="btn btn-primary" href="{{ path('salaire_new') }}">
+                Nouveau
+            </a>
+        
+    {% endblock %}

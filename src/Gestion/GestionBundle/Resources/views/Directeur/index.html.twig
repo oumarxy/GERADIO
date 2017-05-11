@@ -1,0 +1,61 @@
+{% extends 'GestionBundle::layout_gestion.html.twig' %}
+
+{% block container_gestion %} 
+    <h1>Directeur </h1>
+
+    <button type="button" class="missionBTN btn btn-success" data-toggle="modal" data-target=".mission-modal-md">Nouveau Directeur</button>
+    <div class="divider"></div>
+    
+    <div class="row">
+        <div class="col-md-5">	
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nom du directeur</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for entity in entities %}
+                        <tr>
+                            <td>{{ entity.nomDirecteur }}</td>
+                            <td>
+                                <a class="btn btn-success btn-xs" href="{{ path('directeur_show', { 'id': entity.id }) }}">Voir</a>
+                                <a class="btn btn-primary btn-xs" href="{{ path('directeur_edit', { 'id': entity.id }) }}">modifier</a>
+
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div> 
+
+
+
+
+    {# le modal de gestion de mission #}
+    <div class="modal fade mission-modal-md" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                {{ form_start(form_directeur) }}
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel2">Nouveau Directeur</h4>
+                </div>
+                <div class="modal-body">
+                    {{ form_row(form_directeur.nomDirecteur, {'label':'Nom & prenom'}) }}
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default left" data-dismiss="modal">Fermer</button>
+                    {{form_row(form_directeur.submit, { "label": "Confirmer" })}}
+                </div> 
+                {{ form_widget(form_directeur._token) }} 
+                {{ form_end(form_directeur, {'render_rest': false})}}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

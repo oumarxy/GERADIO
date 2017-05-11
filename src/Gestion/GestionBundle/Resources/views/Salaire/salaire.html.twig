@@ -1,0 +1,110 @@
+{% extends 'GestionBundle::layout_gestion.html.twig' %}
+
+{% block container_gestion %} 
+ {% set total = 0 %}
+    {% set quota = 0 %}
+	 {% set salaire = 0 %}
+        {% if tableauCompo is defined %}
+		
+	
+        <div class="row">
+             <form name="salaire" method="post" action="{{path('salaire_employe_creation', {'idemp': employe.id, 'operation':'register'})}}">
+            <div class="col-md-7">
+                      <table class="table table-striped table-bordered">
+                <tbody>
+
+                    <tr>
+                        <th> Nomclient</th>
+                        <td><strong class="text-uppercase">{{ employe.nomemp  }}{{ employe.prenomemp  }}</strong></td>
+                    </tr>
+                   
+                    <tr>
+                        <th>Fonction</th>
+                        <td>{{ employe.fonction }}</td>
+                    </tr>
+					
+                    
+                </tbody>
+    </table>	
+    <table class="table table-striped table-bordered">
+                <tbody>
+
+                    <tr>
+                        <th> Salaire de Base</th>
+                        <td>{{ banque.salbase }}</td>
+                    </tr>
+                   
+                   
+                    
+                </tbody>
+    </table>	
+                <table class="table table-bordered">
+                    <thead>
+                        <tr >
+                          <th>Composante</th>
+                         <th>type</th>
+                         <th>Taux</th>
+                          <th>Montant</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for compo in tableauCompo %}  
+                            <tr class="even pointer">
+                                <td>{{ compo.composante }}</td>
+                                <td>{{ compo.type }} </td>
+								<td>{{ compo.taux }} </td>	
+						    {% if compo.taux!=0 and compo.type=='retenue'  %}  
+                             {% set quota = (banque.salbase * compo.taux)/100 %}							
+								<td>{{ quota }}</td>
+								{% set total = total - quota %}
+							{% endif %}
+							{% if compo.taux!=0 and compo.type=='gain'  %}
+                             {% set quota = (banque.salbase * compo.taux)/100 %}							
+                                 <td>{{ quota }}</td>	
+                               {% set total = total + quota %}								 
+							 {% endif %}	
+							{% if compo.taux==0 and compo.type=='gain'  %} 
+							  {% set quota = compo.montant %}	
+                                 <td>{{ quota }}</td>	
+                               {% set total = total + quota %}								 
+							 {% endif %}
+							 {% if compo.taux==0 and compo.type=='retenue'  %} 
+							  {% set quota = compo.montant %}	
+                                 <td>{{ quota }}</td>	
+                               {% set total = total - quota %}								 
+							 {% endif %}
+                            </tr>
+                            
+                        {% endfor %}
+                    </tbody>
+                </table>
+				 <dl class="dl-horizontal pull-right" style="margin-right: 120px;">
+				       {% set salaire = banque.salbase + total %}
+                        <dt>Salaire mensuel :</dt>
+                        <dd>{{ salaire }} F CFA</dd>
+
+                    </dl>
+	<table class="table table-striped table-bordered">
+                <tbody>
+                
+                </tbody>
+    </table>
+	<div class="row">
+                        <div class="col-md-12">
+                            <label>Action *:</label>
+                            <p>
+                                Enrégistrer & Imprimer:
+                                <input type="radio" class="flat" name="saveprint" id="save" value="save" checked="" required /> &nbsp; &nbsp;
+                                Imprimer:
+                                <input type="radio" class="flat" name="saveprint" id="print" value="print" /> &nbsp; &nbsp; &nbsp; &nbsp;
+                                
+                                <button type="submit" class="btn btn-success" ><i class="fa fa-file-pdf-o"></i> Valider</button>
+                                <a class="btn btn-primary" href="{{path('client')}}" > Quitter</a>
+                            </p>
+                        </div>
+                       
+                    </div>
+			</div>	
+			 </form>
+         {% endif %}
+{% endblock %}

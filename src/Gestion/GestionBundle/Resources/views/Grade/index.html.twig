@@ -1,0 +1,59 @@
+{% extends 'GestionBundle::layout_gestion.html.twig' %}
+
+{% block container_gestion %} 
+    <h1>Listes des Grades</h1>
+<button type="button" class="gradeBTN btn btn-success" data-toggle="modal" data-target=".grade-modal-md">Nouveau Grade</button>
+   <div class="row">
+        <div class="col-md-4">
+     <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>grade</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td>{{ entity.libgrade }}</td>
+                <td>
+                
+                        <a class="btn btn-success btn-xs" href="{{ path('grade_show', { 'id': entity.id }) }}">Voir</a>
+                  
+                        <a class="btn btn-success btn-xs" href="{{ path('grade_edit', { 'id': entity.id }) }}">modifier</a>
+                    
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+	  </div>  
+	  
+	  {# le modal de gestion de grade #}
+
+    <div class="modal fade grade-modal-md" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                {{ form_start(form_grade) }}
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel2">Grade</h4>
+                </div>
+                <div class="modal-body">
+                    {{ form_row(form_grade.libgrade, {'label':'Libellé'}) }}
+                   
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default left" data-dismiss="modal">Fermer</button>
+                    {{form_row(form_grade.submit, { "label": "Confirmer" })}}
+                </div> 
+                {{ form_widget(form_grade._token) }} 
+                {{ form_end(form_grade, {'render_rest': false})}}
+            </div>
+        </div>
+    </div>
+        
+        
+    {% endblock %}

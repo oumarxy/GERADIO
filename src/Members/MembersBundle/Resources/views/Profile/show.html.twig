@@ -1,0 +1,27 @@
+{% extends 'MembersBundle::layout_member.html.twig' %}
+
+
+{% block fos_user_content %}
+    <div class="row">
+        <div class="col-md-5 col-md-offset-2 page-header">
+<div class="container">
+    {% include "FOSUserBundle:Profile:show_content.html.twig" %}
+</div>
+</div>
+ <div class="col-md-5 page-header">
+    <div>
+          <a href="{{ path('fos_user_profile_edit') }}">
+            Editer mon profil
+        </a>
+    </div>
+            <div class="clearfix divider"></div>
+    <div>
+          <a href="{{ path('fos_user_change_password') }}">
+           Changer de Mot de Passe
+        </a>
+    </div>
+            <div class="clearfix divider"></div>
+  
+        </div>
+    </div>
+{% endblock fos_user_content %}

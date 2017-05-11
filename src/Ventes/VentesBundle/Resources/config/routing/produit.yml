@@ -1,0 +1,32 @@
+produit:
+    path:     /{idcli}
+    defaults: { _controller: "VentesBundle:Produit:index" }
+    requirements:
+        iclci: \d+
+
+produit_show:
+    path:     /{id}/show
+    defaults: { _controller: "VentesBundle:Produit:show" }
+
+produit_new:
+    path:     /new
+    defaults: { _controller: "VentesBundle:Produit:new" }
+
+produit_create:
+    path:     /{idcli}/create
+    defaults: { _controller: "VentesBundle:Produit:create" }
+    methods:  POST
+
+produit_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "VentesBundle:Produit:edit" }
+
+produit_update:
+    path:     /{id}/update
+    defaults: { _controller: "VentesBundle:Produit:update" }
+    methods:  [POST, PUT]
+
+produit_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "VentesBundle:Produit:delete" }
+    methods:  [POST, DELETE]

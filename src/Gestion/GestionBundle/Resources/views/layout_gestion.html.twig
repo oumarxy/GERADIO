@@ -1,0 +1,26 @@
+{% extends '::layout/layout_app.html.twig' %}
+
+ {#    
+    /**
+    *
+    *  Environnement commun 
+    *
+    **/
+#}
+{% block container_app %}  
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+       
+        <!-- Main content -->
+        <section class="content">            
+            {% block container_gestion %}                 
+                                            
+            {% endblock container_gestion %} 
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+{% endblock container_app %}
+
+
+

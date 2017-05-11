@@ -1,0 +1,18 @@
+members:
+    resource: "@MembersBundle/Resources/config/routing.yml"
+    prefix:   /
+
+ventes:
+    resource: "@VentesBundle/Resources/config/routing.yml"
+    prefix:   /
+
+gestion:
+    resource: "@GestionBundle/Resources/config/routing.yml"
+    prefix:   /
+
+
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+_imagine:
+    resource: .
+    type:     imagine

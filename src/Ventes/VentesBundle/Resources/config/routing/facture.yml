@@ -1,0 +1,63 @@
+facture:
+    path:     /{idcli}/{etat}/f
+    defaults: { _controller: "VentesBundle:Facture:index" }
+    requirements:
+        idcli: \d+
+
+proforma_all:
+    path:     /allproforma
+    defaults: { _controller: "VentesBundle:Facture:allProforma" }
+
+facture_all:
+    path:     /allfacture
+    defaults: { _controller: "VentesBundle:Facture:allFacture" }
+
+facture_validation_proforma:
+    path:     /{idproforma}/validation
+    defaults: { _controller: "VentesBundle:Facture:valider" }
+
+
+facture_resilier:
+    path:     /{idfacture}/resiliation
+    defaults: { _controller: "VentesBundle:Facture:retirer" }
+
+
+facture_impression:
+    path:     /{idfacture}/impression
+    defaults: { _controller: "VentesBundle:Facture:impressionFacture" }
+    requirements:
+        idfacture: \d+
+
+facture_show:
+    path:     /{id}/show
+    defaults: { _controller: "VentesBundle:Facture:show" }
+
+facture_new:
+    path:     /{idclient}/{etat}/new
+    defaults: { _controller: "VentesBundle:Facture:new" }
+    requirements:
+        idclient: \d+
+
+fact_etat_compte:
+    path:     /{idcli}/compte/cpt
+    defaults: { _controller: "VentesBundle:Facture:compteEtat" }
+    methods:  POST
+
+facture_create:
+    path:     /{idclient}/{etat}/create/c
+    defaults: { _controller: "VentesBundle:Facture:create" }
+    methods:  POST
+
+facture_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "VentesBundle:Facture:edit" }
+
+facture_update:
+    path:     /{id}/update
+    defaults: { _controller: "VentesBundle:Facture:update" }
+    methods:  [POST, PUT]
+
+facture_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "VentesBundle:Facture:delete" }
+    methods:  [POST, DELETE]

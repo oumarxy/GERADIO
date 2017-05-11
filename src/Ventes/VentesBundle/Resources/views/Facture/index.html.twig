@@ -1,0 +1,62 @@
+{% extends "VentesBundle::layout_ventes.html.twig" %}
+
+{% block container_ventes %}
+    <div class="container">
+        {% if client is defined %}
+            <h2>{{client.nom}} / {{client.telephone}}</h2>
+        {% endif %}
+        <h3>{{type}}</h3>
+
+        <table  class="liste panel table table-striped table-bordered table-hover order-column">
+            <thead>
+                <tr>
+                    <th>Numero</th>
+                    <th>Date</th>
+                    <th>Montant facture</th>
+                    <th>Reste à payer</th>
+                    <th>Etat</th>
+                    <th width="28%">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for entity in entities %}
+                    {% set total_deja_encaisse = 0 %}
+                    <tr>
+                        <td>{{ entity.numero }}</td>
+                        <td>{% if entity.dateFacture %}{{ entity.dateFacture|date('d/m/Y') }}{% endif %}</td>
+                        <td>{{ entity.totalFacture|number_format(0,',',' ') }}</td>
+                        {% for encaissement in entity.encaissement %}
+                            {% set total_deja_encaisse = total_deja_encaisse + encaissement.montant  %}
+                        {% endfor %}
+                        <td>{{(entity.totalFacture - total_deja_encaisse)|number_format(0,',',' ')  }}</td>
+                        <td>{{ entity.etat }}</td>
+                        <td>
+                            <a class="btn btn-info btn-xs" href="{{ path('facture_show', {'id': entity.id }) }}">
+                                Détails
+                            </a>
+                            {% if type != 'Proforma' %}
+                                <a class="btn btn-info btn-xs" href="{{ path('encaissement', {'idfacture': entity.id }) }}">
+                                    Paiements
+                                </a>
+                            {% endif %}
+                            {% if type == 'Proforma' %}
+                                <a class="btn btn-primary btn-xs" href="{{ path('facture_validation_proforma', {'idproforma': entity.id}) }}">
+                                    Valider
+                                </a>
+                            {% elseif entity.etat == "En cours" %}
+                                 {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_COMPTABLE')  %}
+                       
+                                <a class="btn btn-primary btn-xs" href="{{ path('encaissement_new', {'idfacture': entity.id}) }}">
+                                    Encaisser
+                                </a>
+                            {% endif %}
+                            {% endif %}
+
+
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

@@ -1,0 +1,174 @@
+
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <style>
+
+            body {
+                height: 297mm;/*297*/
+                width: 210mm;
+            }
+            .invoice-box{
+                max-width:800px;
+                margin-left: 50px;
+                padding:30px;
+                font-size:16px;
+                line-height:24px;
+                font-family:'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+                color:#555;
+                height: 842px;
+            }
+
+            .invoice-box table{
+                width:100%;
+                line-height:inherit;
+                text-align:left;
+            }
+
+            .invoice-box table td{
+                padding:5px;
+                vertical-align:top;
+            }
+
+            .invoice-box table tr td:nth-child(2){
+                text-align:left;
+            }
+
+            .invoice-box table tr.top table td{
+                padding-bottom:20px;
+            }
+
+            .invoice-box table tr.top table td.title{
+                font-size:45px;
+                line-height:45px;
+                color:#333;
+            }
+
+            .invoice-box table tr.information table td{
+                padding-bottom:40px;
+            }
+
+            .invoice-box table tr.heading td{
+                background:#eee;
+                border-bottom:1px solid #ddd;
+                font-weight:bold;
+            }
+
+            .invoice-box table tr.details td{
+                padding-bottom:20px;
+            }
+
+            .invoice-box table tr.item td{
+                border-bottom:1px solid #eee;
+            }
+
+            .invoice-box table tr.item.last td{
+                border-bottom:none;
+            }
+
+            .invoice-box table tr.total td:nth-child(2){
+                border-top:2px solid #eee;
+                font-weight:bold;
+            }
+            tr{
+                border-bottom: 2px solid #eee !important;
+            }
+
+            @media only screen and (max-width: 600px) {
+                .invoice-box table tr.top table td{
+                    width:100%;
+                    display:block;
+                    text-align:center;
+                }
+
+                .invoice-box table tr.information table td{
+                    width:100%;
+                    display:block;
+                    text-align:center;
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <div class="invoice-box">
+            <table cellpadding="0" cellspacing="0" class="table table-striped">
+                <tr class="top">
+                    <td colspan="5">
+					<br>
+					<br>
+					<br><br>
+					<br>
+					<br>
+                        <table>
+                            <tr>
+							    <td style="text-align: right">
+                                   Abidjan, le {{ 'now'|date('d/m/Y') }} 
+                                </td>
+								 <td >
+                                   
+                                </td>
+								 <td >
+                                    
+                                </td>
+								
+                                <td >
+                                   <h2><u>AUTORISATION DE CONGE ANNUEL</u></h2>  
+                                </td>
+								
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+			<p style="font-size: 18px">
+			Je soussigné , Monsieur{% for directeur in directeurs %} <b>{{ directeur.nomDirecteur}}</b>{% endfor%}, Directeur Général de <b>Radio Amitié</b> accorde à {{ employe.civilitemp  }} <b> {{ employe.nomemp  }} {{ employe.prenomemp  }}</b>, {{ employe.fonction }} au sein de notre entreprise, 
+			une période d'absence justifiée allant du <b>  {{ entity.datedept|date('d/m/Y') }} </b> au <b> {{ entity.dateretour |date('d/m/Y')}}</b>  inclus correspondant à son congé annuel acquit de droit au titre de l'année {{ 'now'|date('Y') }} .
+			</p>
+			
+		
+			<p style="font-size: 18px"> En foi de quoi, Le présent ordre de congé lui est delivré pour servir et valoir ce que de droit./.</p>
+		       <br>
+			<br>
+			<br>
+			 <br>
+			<br>
+			<br>
+			 <br>
+			<br>
+			<br>
+			 <br>
+			<br>
+			<br>
+			 <br>
+			<br>
+			<br>
+			 <br>
+			<br>
+		
+			<table >
+                    <tr>
+					 <td style="text-align: right; font-size: 20px;">
+                         <u>Le Directeur Général</u>
+                     </td>
+                                
+                    </tr>
+            </table>
+			 <br>
+			<br>
+			<table >
+                    <tr>
+					 <td style="text-align: right; font-size: 18px;">
+                         Mr. {% for directeur in directeurs %} {{ directeur.nomDirecteur}}{% endfor%}
+                     </td>
+                                
+                    </tr>
+            </table>
+			
+        </div>
+		
+    </body>
+</html>

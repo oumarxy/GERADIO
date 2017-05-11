@@ -1,0 +1,30 @@
+service:
+    path:     /
+    defaults: { _controller: "GestionBundle:Service:index" }
+
+service_show:
+    path:     /{id}/show
+    defaults: { _controller: "GestionBundle:Service:show" }
+
+service_new:
+    path:     /new
+    defaults: { _controller: "GestionBundle:Service:new" }
+
+service_create:
+    path:     /create
+    defaults: { _controller: "GestionBundle:Service:create" }
+    methods:  POST
+
+service_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "GestionBundle:Service:edit" }
+
+service_update:
+    path:     /{id}/update
+    defaults: { _controller: "GestionBundle:Service:update" }
+    methods:  [POST, PUT]
+
+service_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "GestionBundle:Service:delete" }
+    methods:  [POST, DELETE]

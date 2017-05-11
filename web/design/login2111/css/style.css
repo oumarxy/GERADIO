@@ -1,0 +1,99 @@
+
+body{
+	background-color: whitesmoke !important;
+}
+/*******/
+.login-10{
+	background-color: #006EBD;
+	padding:6em 0;
+}
+.tenth-login {
+	background: #f6f8f7;
+	text-align: center;
+	border-radius: 0.4em;
+	-o-border-radius: 0.4em;
+	-webkit-border-radius: 0.4em;
+	-moz-border-radius: 0.4em;
+	width: 32%;
+	margin: 0 auto;
+}
+.tenth-login  h4{
+	font-size: 1.2em;
+	color: #646464;
+	font-family: 'PT Sans', sans-serif;
+	background: #eee;
+	padding: 1.8em 0em;
+	border-top-right-radius:0.4em;  
+	-o-border-top-right-radius:0.4em;  
+	-moz-border-top-right-radius:0.4em;  
+	-webkit-border-top-right-radius:0.4em;  
+	border-top-left-radius:0.4em; 
+	-o-border-top-left-radius:0.4em; 
+	-moz-border-top-left-radius:0.4em; 
+	-webkit-border-top-left-radius:0.4em;  
+}
+form.ten {
+	padding: 5% 0 7% 0;
+}
+
+form.ten li{
+	list-style: none;
+	width:90%;
+	background: #3b5998;
+	border:none;
+	margin:0 auto;
+	border-radius: 0.3em;
+	-o-border-radius: 0.3em;
+	-moz-border-radius: 0.3em;
+	-webkit-border-radius: 0.3em;
+}
+
+form.ten li.cream{
+	list-style: none;
+	width:80%;
+	background: #f2f2f2;
+	border:none;
+	margin: 9px auto;
+}
+.tenth-login input[type="text"],.tenth-login  input[type="password"] {
+	width: 74%;
+	padding: 0.8em 0.7em 1em 1em;
+	color: #8f9091;
+	font-size: 18px;
+	outline: none;
+	background: none;
+	border: none;
+	-webkit-appearance: none;
+	font-weight: 400;
+	font-family: 'PT Sans', sans-serif;
+	border-left: 1px solid #fff;
+}
+.submit-ten{
+	margin-top:0.8em;
+}
+.tenth-login input[type="submit"]{
+	font-size:20px;
+	font-weight:400;
+	color: #fff;
+	display: inline-block;
+	padding:0.8em 0em;
+	width: 80%;
+	font-family: 'PT Sans', sans-serif;
+	cursor: pointer;
+	-webkit-appearance: none;
+	border: none;
+	outline: none;
+	background:#4d4d4d;
+	-o-border-radius:0.3em;  
+	-moz-border-radius:0.3em;  
+	-webkit-border-radius:0.3em;  
+	border-radius:0.3em;  
+
+}
+
+.copy-right {
+	text-align: center;
+	margin: 2% 0;
+}
+
+

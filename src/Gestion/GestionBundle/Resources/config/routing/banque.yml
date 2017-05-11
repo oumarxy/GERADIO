@@ -1,0 +1,47 @@
+banque:
+    path:    /{idemp}/
+    defaults: { _controller: "GestionBundle:Banque:index" }
+    requirements:
+        idemp: \d+
+
+banque_show:
+    path:     /{id}/show
+    defaults: { _controller: "GestionBundle:Banque:show" }
+
+banque_new:
+    path:     /{idemp}/new
+    defaults: { _controller: "GestionBundle:Banque:new" }
+    requirements:
+        idemp: \d+
+        
+banque_pdf:
+    path:     /{idemp}/{idbanque}/banque_pdf
+    defaults: { _controller: "GestionBundle:Banque:salaire_pdf" }
+     
+salaire_employe_creation:
+    path:     /{idemp}/e/sal
+    defaults: { _controller: "GestionBundle:Banque:paiesalaire" }
+    methods:  POST
+    requirements:
+        idemp: \d+
+
+banque_create:
+    path:     /{idemp}/create
+    defaults: { _controller: "GestionBundle:Banque:create" }
+    methods:  POST
+    requirements:
+        idemp: \d+
+
+banque_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "GestionBundle:Banque:edit" }
+
+banque_update:
+    path:     /{id}/update
+    defaults: { _controller: "GestionBundle:Banque:update" }
+    methods:  [POST, PUT]
+
+banque_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "GestionBundle:Banque:delete" }
+    methods:  [POST, DELETE]

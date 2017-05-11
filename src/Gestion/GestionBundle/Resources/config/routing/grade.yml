@@ -1,0 +1,30 @@
+grade:
+    path:     /
+    defaults: { _controller: "GestionBundle:Grade:index" }
+
+grade_show:
+    path:     /{id}/show
+    defaults: { _controller: "GestionBundle:Grade:show" }
+
+grade_new:
+    path:     /new
+    defaults: { _controller: "GestionBundle:Grade:new" }
+
+grade_create:
+    path:     /create
+    defaults: { _controller: "GestionBundle:Grade:create" }
+    methods:  POST
+
+grade_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "GestionBundle:Grade:edit" }
+
+grade_update:
+    path:     /{id}/update
+    defaults: { _controller: "GestionBundle:Grade:update" }
+    methods:  [POST, PUT]
+
+grade_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "GestionBundle:Grade:delete" }
+    methods:  [POST, DELETE]

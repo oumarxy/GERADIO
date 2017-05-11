@@ -1,0 +1,36 @@
+sanction:
+    path:     /{idemp}/
+    defaults: { _controller: "GestionBundle:Sanction:index" }
+    requirements:
+        idemp: \d+
+
+sanction_show:
+    path:     /{id}/show
+    defaults: { _controller: "GestionBundle:Sanction:show" }
+
+sanction_new:
+    path:     /{idemp}/new
+    defaults: { _controller: "GestionBundle:Sanction:new" }
+    requirements:
+        idemp: \d+
+
+sanction_create:
+    path:     /{idemp}/create
+    defaults: { _controller: "GestionBundle:Sanction:create" }
+    methods:  POST
+    requirements:
+        idemp: \d+
+
+sanction_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "GestionBundle:Sanction:edit" }
+
+sanction_update:
+    path:     /{id}/update
+    defaults: { _controller: "GestionBundle:Sanction:update" }
+    methods:  [POST, PUT]
+
+sanction_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "GestionBundle:Sanction:delete" }
+    methods:  [POST, DELETE]

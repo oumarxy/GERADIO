@@ -1,0 +1,30 @@
+etude:
+    path:     /
+    defaults: { _controller: "GestionBundle:Etude:index" }
+
+etude_show:
+    path:     /{id}/show
+    defaults: { _controller: "GestionBundle:Etude:show" }
+
+etude_new:
+    path:     /new
+    defaults: { _controller: "GestionBundle:Etude:new" }
+
+etude_create:
+    path:     /create
+    defaults: { _controller: "GestionBundle:Etude:create" }
+    methods:  POST
+
+etude_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "GestionBundle:Etude:edit" }
+
+etude_update:
+    path:     /{id}/update
+    defaults: { _controller: "GestionBundle:Etude:update" }
+    methods:  [POST, PUT]
+
+etude_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "GestionBundle:Etude:delete" }
+    methods:  [POST, DELETE]

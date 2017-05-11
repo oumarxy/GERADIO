@@ -1,0 +1,27 @@
+{% extends 'GestionBundle::layout_gestion.html.twig' %}
+
+{% block container_gestion %} 
+    <h1>Service</h1>
+ <div class="row">
+        <div class="col-md-4">
+    <table class="table table-striped table-bordered">
+        <tbody>
+            
+            <tr>
+                <th>Libservice</th>
+                <td>{{ entity.libservice }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</div>
+   
+        <a class="btn btn-success btn-xs" href="{{ path('service') }}">
+            Retour
+        </a>
+  
+        <a class="btn btn-success btn-xs" href="{{ path('service_edit', { 'id': entity.id }) }}">
+            Modifier
+        </a>
+  {{ form(delete_form) }}
+{% endblock %}

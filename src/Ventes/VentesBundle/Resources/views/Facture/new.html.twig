@@ -1,0 +1,119 @@
+{% extends "VentesBundle::layout_ventes.html.twig" %}
+
+{% block container_ventes %}
+
+    <h1>{{etat|capitalize}} </h1>
+    <div class="row">
+        {{ form_start(form) }}
+
+        <div class="col-md-4">
+            <table class="table table-bordered">
+                <tbody>
+                    <tr>
+                        <th>Numero</th>
+                        <td>{{ client.numero }}</td>
+                    </tr>
+                    <tr>
+                        <th>Nom</th>
+                        <td>{{ client.nom }}</td>
+                    </tr>
+                    <tr>
+                        <th>Adresse</th>
+                        <td>{{ client.adresse }}</td>
+                    </tr>
+                    <tr>
+                        <th>Telephone</th>
+                        <td>{{ client.telephone }}</td>
+                    </tr>
+                    <tr>
+                        <th>Mail</th>
+                        <td>{{ client.mail }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="x_panel">
+                <div class="x_content">
+                    <div class="form-group">
+                        {{form_label(form.reduction)}}
+                        <div class="input-group">
+                            {{form_widget(form.reduction)}}
+                            <span class="input-group-addon">
+                                <label>F CFA</label>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="divider-dashed"></div>
+                    <div class="form-group">
+                        {{form_label(form.remise)}}
+                        <div class="input-group">
+                            {{form_widget(form.remise)}}
+                            <span class="input-group-addon">
+                                <label>%</label>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="divider-dashed"></div>
+                    <div class="form-group">
+                        {{form_label(form.tvafacture)}}
+                        <div class="input-group">
+                            {{form_widget(form.tvafacture)}}
+                            <span class="input-group-addon">
+                                <label>%</label>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="row">
+                <div class="col-md-12 ">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>  
+                                Produits
+                            </h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th width="12%">#Ref</th>
+                                        <th width="45%">Libellé</th>
+                                        <th width="20%">Prix HT</th>
+                                        <th width="15%">Quantité</th>
+                                        <th >Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="detailsproduits" data-prototype="
+                                       {% filter escape %}
+                                           {{ include('VentesBundle::sections_ventes/collection_prod.html.twig', { 'form_prod': form.detailsProduits.vars.prototype }) }}
+                                       {% endfilter %}">
+
+
+                                </tbody>
+                            </table>
+                            <h2>  
+                                <a class="add_prod btn btn-success">Ajouter un produit</a>
+                            </h2>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+          
+            <div class="clearfix"></div>
+            {{form_row(form.submit, { 'label': 'Soumettre' })}}
+
+        </div>
+        {{ form_widget(form._token) }} 
+        {{ form_end(form, {'render_rest': false}) }}
+    </div>
+
+{% endblock %}

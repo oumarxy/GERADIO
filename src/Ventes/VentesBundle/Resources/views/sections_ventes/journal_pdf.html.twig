@@ -1,0 +1,185 @@
+
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <style>
+
+            body {
+                height: 297mm;/*297*/
+                width: 210mm;
+            }
+            .invoice-box{
+                max-width:800px;
+                margin-left: 50px;
+                padding:30px;
+                font-size:16px;
+                line-height:24px;
+                font-family:'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+                color:#555;
+                height: 842px;
+            }
+
+            .invoice-box table{
+                width:100%;
+                line-height:inherit;
+                text-align:left;
+            }
+            td{
+                font-size: 13px !important;
+            }
+
+            .invoice-box table td{
+                padding:5px;
+                vertical-align:top;
+            }
+
+            .invoice-box table tr td:nth-child(2){
+                text-align:left;
+            }
+
+            .invoice-box table tr.top table td{
+                padding-bottom:20px;
+            }
+
+            .invoice-box table tr.top table td.title{
+                font-size:45px;
+                line-height:45px;
+                color:#333;
+            }
+
+            .invoice-box table tr.information table td{
+                padding-bottom:40px;
+            }
+
+            .invoice-box table tr.heading td{
+                background:#ccc;
+                border-bottom:1px solid #ddd;
+                font-weight:bold;
+            }
+
+            .invoice-box table tr.details td{
+                padding-bottom:20px;
+            }
+
+            .invoice-box table tr.item td{
+                border-bottom:1px solid #eee;
+            }
+
+            .invoice-box table tr.item.last td{
+                border-bottom:none;
+            }
+
+            .invoice-box table tr.total td:nth-child(2){
+                border-top:2px solid #eee;
+                font-weight:bold;
+            }
+            tr{
+                border-bottom: 2px solid #eee !important;
+            }
+
+            @media only screen and (max-width: 600px) {
+                .invoice-box table tr.top table td{
+                    width:100%;
+                    display:block;
+                    text-align:center;
+                }
+
+                .invoice-box table tr.information table td{
+                    width:100%;
+                    display:block;
+                    text-align:center;
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="invoice-box">
+            <table cellpadding="0" cellspacing="0">
+                <tr class="top">
+                    <td colspan="5">
+                        <table>
+                            <tr>
+                                <td class="title">
+                                    {#<img src="{{ asset('design/dist/img/bosoft.png') }}" style="width:130%; max-width:130px;">#}
+                                </td>
+
+                                <td style="text-align: right">
+                                    Abidjan, le{{'now'|date('d/m/Y') }}
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="5" style="text-transform: capitalize" align="left"><strong>Objet : &nbsp;</strong>Journal de caisse</td>
+                </tr>
+                <tr>
+                    <td colspan="5" style="text-transform: capitalize" align="left"><strong>Période : &nbsp;</strong> du {{datedebut|date('d/m/Y')}} au {{datefin|date('d/m/Y')}}</td>
+                </tr>
+                {% set total_caisse = 0 %}
+                {% if encaissements|length > 0 %}
+                    <tr class="heading">
+                        <td width="10%">Numero.</td>
+                        <td width="40%">Date</td>
+                        <td>Montant</td>
+                        <td align="right" width="20%">Montant Payé</td>
+                        <td align="right" width="20%">Etat</td>
+                    </tr>
+
+                    {% for encaissement in encaissements %}
+                        <tr class="item">
+                            <td>{{ encaissement.facture.numero }}</td>
+                            <td>{% if encaissement.dateFormat %}{{ encaissement.dateFormat|date('d/m/Y') }}{% endif %}</td>
+                            <td>{{ encaissement.facture.totalFacture|number_format(0,',',' ') }}</td>
+
+                            {% set total_caisse  = total_caisse  + encaissement.montant %}
+
+                            <td align="right">{{encaissement.montant|number_format(0,',',' ')  }}</td>
+                            <td align="right">{{ encaissement.facture.etat }}</td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+                <tr class="vide">
+                    <td colspan="5"> &nbsp; </td>
+                </tr>
+
+                {% if operations|length > 0 %}
+                    <tr class="heading">
+                        <td width="40%">Nom</td>
+                        <td width="20%">Date</td>
+                        <td>Montant</td>
+                        <td align="right" width="20%">Flux</td>
+                        <td align="right" width="20%">Libellé</td>
+                    </tr>
+                    {% for operation in operations %}
+                        <tr class="item">
+                            <td>{{ operation.nom }}</td>
+                            <td>{% if operation.dateOperation %}{{ operation.dateOperation|date('d/m/Y') }}{% endif %}</td>
+                            {% if operation.flux == 'Entrée'  %}
+                                <td> {{ operation.montant|number_format(0,',',' ') }}</td>
+                                {% set total_caisse  = total_caisse  + operation.montant %}
+                            {% elseif operation.flux == 'Sortie' %}
+                                <td> - {{ operation.montant|number_format(0,',',' ') }}</td>
+                                {% set total_caisse  = total_caisse  - operation.montant %}
+                            {% endif %}
+                            <td align="right">{{operation.flux}}</td>
+                            <td align="right">{{ operation.libelle }}</td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+                <tr class="vide">
+                    <td colspan="5"> &nbsp; </td>
+                </tr>
+                <tr class="total">
+                    <td colspan="2"></td>
+                    <td colspan="2" style="text-align: right;font-size: 24px"><strong>Total caisse :</strong></td>
+                    <td align="right" ><strong><span style="text-align: right;font-size: 16px">{{total_caisse|number_format(0,',',' ')}}</span></strong></td>
+                </tr>
+            </table>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,29 @@
+{% extends "VentesBundle::layout_ventes.html.twig" %}
+
+{% block container_ventes %}
+    <h1>Produit</h1>
+    <div class="row">
+        <div class="col-md-5">
+            <table class="table table-bordered ">
+                <tbody>
+                    <tr>
+                        <th>Réf. Produit</th>
+                        <td>{{ entity.refProd }}</td>
+                    </tr>
+                    <tr>
+                        <th>Libellé</th>
+                        <td>{{ entity.libelle }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <a class="btn btn-primary" href="{{ path('produit', {'idcli':entity.client.id}) }}">Retour</a>
+        </div>
+        {%if entity.utilisateur is not null %} 
+            <div class="col-md-4">
+                <div class="">Dernière modification effectuée par: {{entity.utilisateur.username|capitalize}}</div>
+                <div class="">Le {{entity.lastUpdate|date('d/m/Y')}} à {{entity.lastUpdate|date('H:i:s')}}</div>
+            </div>
+        {% endif %}
+    </div>
+
+{% endblock %}

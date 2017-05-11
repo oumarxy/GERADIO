@@ -1,0 +1,26 @@
+{% extends 'GestionBundle::layout_gestion.html.twig' %}
+
+{% block container_gestion %} 
+    <h1>Directeur</h1>
+<div class="row">
+  <div class="col-md-5">
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Nom du directeur</th>
+                <td>{{ entity.nomDirecteur }}</td>
+            </tr>
+        </tbody>
+    </table>
+ </div>
+</div> 
+    
+        <a class="btn btn-primary " href="{{ path('directeur') }}">
+           Retour
+        </a>
+  
+        <a class="btn btn-primary " href="{{ path('directeur_edit', { 'id': entity.id }) }}">
+            Modifier
+        </a>
+    {{ form(delete_form) }}
+{% endblock %}

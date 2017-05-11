@@ -1,0 +1,178 @@
+{% extends 'GestionBundle::layout_gestion.html.twig' %}
+
+{% block container_gestion %}
+    <h1>Gestion du Salaire </h1>
+
+    <hr />
+    <div class="row">
+        <div class="col-md-6">
+            <table class="table table-striped table-bordered">
+                <tbody>
+                    <tr>
+                        <td> 
+                            {% if employe.path is not null %}
+                                <img class="img-circle" src="{{ asset('uploads/profiles/' ~ employe.path)}}"  width="100" height="100">
+                            {% else %}
+                                <img class="img-circle" src="{{ asset('uploads/profiles/default.png')}}"  width="100" height="100">
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th> Nom Employé</th>
+                        <td><strong class="text-uppercase">{{ employe.nomemp  }} {{ employe.prenomemp  }}</strong></td>
+                    </tr>
+
+                    <tr>
+                        <th>Activité</th>
+                        <td>{{ employe.fonction }}</td>
+                    </tr>
+                    <tr>
+                        <th>Email</th>
+                        <td>{{ employe.emailemp }}</td>
+                    </tr>
+                    <tr>
+                        <th>Téléphone</th>
+                        <td>{{ employe.telpers }}</td>
+                    </tr>
+                    <tr>
+                        <th>Cellulaire</th>
+                        <td> {{ employe.celemp }}</td>
+                    </tr>
+                    <tr>
+                        <th>Salaire de base</th>
+                        <td> {{ employe.salbase }}</td>
+                    </tr>
+
+                </tbody>
+            </table>
+           
+        </div>
+        <div class="col-md-6">
+            <button type="button" class="salaireBTN btn btn-success" data-toggle="modal" data-target=".salaire-modal-md">Nouvelle composante</button>
+            <form name="salaire" method="post" action="{{path('salaire_employe_creation', {'idemp':employe.id})}}">
+                <table class="table table-striped responsive-utilities jambo_table bulk_action">
+                    {% set quota = 0 %}
+                    {% set salaire = 0 %}
+                    <thead>
+                        <tr>
+                            <th>
+                                <input type="checkbox" id="check-all" class="flat">
+                            </th>
+                            <th>Composante</th>
+                            <th>type</th>
+                            <th>Taux</th>
+                            <th>Montant</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+
+                            {% for compo in salairecompo %}
+                            <tr class="even pointer">
+                                <td class="a-center "><input type="checkbox"  name="compo{{ compo.id }}" class="flat table_records" ></td>
+                                <td>{{ compo.composante }}</td>
+                                <td>{{ compo.type }}</td>
+                                <td>{{ compo.taux }}</td>
+                                <td>{{ compo.montant }}</td>
+                                <td>
+                                    <a href="{{ path('salairecompo_edit', { 'id': compo.id }) }}">Modifier</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <button type="submit" class="btn btn-primary" >Payer le Salaire</button>
+            </form>
+        </div>
+    </div>
+                    <h3> Liste des salaires </h3>
+
+        <div class="row">
+        <div class="col-md-12">
+         <table class="table table-hover liste">
+                <thead>
+                    <tr>
+                        <th>Mode de paiement</th>
+                        <th>Periode</th>
+                        <th>Salaire net</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for entity in entities %}
+                        <tr>
+                            <td>{{ entity.libbanque }}</td>
+                            <td>Du: {{ entity.dated|date('d/m/Y') }} au
+                            {{ entity.datef|date('d/m/Y') }}</td>
+                            {# calcul du net #}
+                             {% set totalR = 0 %}
+                    {% set totalG = 0 %}
+                    {% for compo in entity.salairecompoTable %}  
+                            {% if compo.taux > 0 %}  
+                                {% set quota = (employe.salbase * compo.taux)/100 %}
+                                {% if compo.type=='retenue' %}  
+                                    {% set totalR = totalR + quota %}
+                                {% else %}
+                                    {% set totalG = totalG + quota %}								 
+                                {% endif %}
+                            {% else %}
+                                {% if compo.type=='retenue'  %} 
+                                    {% set quota = compo.montant %}	
+                                    {% set totalR = totalR + quota %}								 
+                                {% else %}
+                                    {% set quota = compo.montant %}	
+                                    {% set totalG = totalG + quota %}	
+                                {% endif %}
+                            {% endif %}
+                            
+                    {% endfor %}
+                            <td>{{ employe.salbase - totalR + totalG  }}</td>
+                            <td>
+                                <a class="btn btn-success btn-xs" href="{{ path('banque_edit', { 'id': entity.id }) }}">Modifier</a>
+                                <a class="btn btn-primary btn-xs" href="{{ path('banque_pdf',{ 'idbanque': entity.id ,'idemp': employe.id}) }}" target="blank">Imprimer</a>
+
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+                
+        </div>
+    </div>
+
+   
+
+    {# le modal de gestion de salaire #}
+    <div class="modal fade salaire-modal-md" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                {{ form_start(form_salairecompo) }}
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel2">Composante salaire</h4>
+                </div>
+                <div class="modal-body">
+                    {{ form_row(form_salairecompo.composante, {'label':'Composante'}  ) }}
+                    {{ form_row(form_salairecompo.type, {'label':'Type'} ) }}
+                    {{ form_row(form_salairecompo.taux, {'label':'Taux'} ) }}
+                    {{ form_row(form_salairecompo.montant, {'label':'Montant'} ) }}
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default left" data-dismiss="modal">Fermer</button>
+                    {{form_row(form_salairecompo.submit, { "label": "Confirmer" })}}
+                </div> 
+                {{ form_widget(form_salairecompo._token) }} 
+                {{ form_end(form_salairecompo, {'render_rest': false})}}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+
+
+

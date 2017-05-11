@@ -1,0 +1,35 @@
+{% extends "VentesBundle::layout_ventes.html.twig" %}
+
+{% block container_ventes %}
+     <h1>Ajout produit</h1>
+
+    <div class="row">
+        {{ form_start(form) }}
+        <div class="col-md-5">
+            <table class="table table-bordered">
+                <tr>
+                    <td>{{form_label(form.categorieProduit)}}</td>
+                    <td>{{form_widget(form.categorieProduit)}}</td>
+                </tr>
+                <tr>
+                    <td>{{form_label(form.refProd)}}</td>
+                    <td>{{form_widget(form.refProd)}}</td>
+                </tr>
+                <tr>
+                    <td>{{form_label(form.libelle)}}</td>
+                    <td>{{form_widget(form.libelle)}}</td>
+                </tr>
+                <tr>
+                    <td>{{form_label(form.prixHT)}}</td>
+                    <td>{{form_widget(form.prixHT)}}</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>{{form_row(form.submit, { 'label': 'Ajouter' })}}</td>
+                </tr>
+            </table>
+        </div>
+        {{ form_widget(form._token) }}
+        {{ form_end(form, {'render_rest': false}) }}
+    </div>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'GestionBundle::layout_gestion.html.twig' %}
+
+{% block container_gestion %}
+    <h3>Modification Congé</h3>
+<div class="row">
+    <div class="col-md-4">
+    {{ form(edit_form) }}
+ </div> 
+</div>
+<a class="btn btn-primary" href="{{ path('conge', { 'idemp': entity.employe.id }) }}">
+            Retour
+        </a>
+
+{% endblock %}

@@ -1,0 +1,47 @@
+encaissement:
+    path:     /{idfacture}
+    defaults: { _controller: "VentesBundle:Encaissement:index" }
+    requirements:
+        idfacture: \d+
+
+encaissement_all:
+    path:     /allEncaissement
+    defaults: { _controller: "VentesBundle:Encaissement:allEncaissement" }
+
+
+encaissement_single_etat:
+    path:     /{idencaiss}/print/single
+    defaults: { _controller: "VentesBundle:Encaissement:printSingleEncaissement" }
+
+encaissement_print:
+    path:     /{idfact}/print/all
+    defaults: { _controller: "VentesBundle:Encaissement:impressionEncaissement" }
+
+encaissement_show:
+    path:     /{id}/show
+    defaults: { _controller: "VentesBundle:Encaissement:show" }
+
+encaissement_new:
+    path:     /{idfacture}/new
+    defaults: { _controller: "VentesBundle:Encaissement:new" }
+    requirements:
+        idfact: \d+
+
+encaissement_create:
+    path:     /{idfacture}/create
+    defaults: { _controller: "VentesBundle:Encaissement:create" }
+    methods:  POST
+
+encaissement_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "VentesBundle:Encaissement:edit" }
+
+encaissement_update:
+    path:     /{id}/update
+    defaults: { _controller: "VentesBundle:Encaissement:update" }
+    methods:  [POST, PUT]
+
+encaissement_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "VentesBundle:Encaissement:delete" }
+    methods:  [POST, DELETE]

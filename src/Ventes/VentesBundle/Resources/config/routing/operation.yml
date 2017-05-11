@@ -1,0 +1,43 @@
+operation:
+    path:     /
+    defaults: { _controller: "VentesBundle:Operation:index" }
+
+operation_journal_caisse:
+    path:     /journal
+    defaults: { _controller: "VentesBundle:Operation:journal" }
+
+operation_bon_caisse:
+    path:     /{idop}/bon/op
+    defaults: { _controller: "VentesBundle:Operation:bon" }
+
+operation_journal_print:
+    path:     /journal/print
+    defaults: { _controller: "VentesBundle:Operation:journalEtat" }
+    methods:  [POST]
+
+operation_show:
+    path:     /{id}/show
+    defaults: { _controller: "VentesBundle:Operation:show" }
+
+operation_new:
+    path:     /new
+    defaults: { _controller: "VentesBundle:Operation:new" }
+
+operation_create:
+    path:     /create
+    defaults: { _controller: "VentesBundle:Operation:create" }
+    methods:  POST
+
+operation_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "VentesBundle:Operation:edit" }
+
+operation_update:
+    path:     /{id}/update
+    defaults: { _controller: "VentesBundle:Operation:update" }
+    methods:  [POST, PUT]
+
+operation_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "VentesBundle:Operation:delete" }
+    methods:  [POST, DELETE]

@@ -1,0 +1,261 @@
+
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <style>
+
+            body {
+                height: 297mm;/*297*/
+                width: 210mm;
+            }
+            .invoice-box{
+                max-width:800px;
+                margin-left: 50px;
+                padding:30px;
+                font-size:16px;
+                line-height:24px;
+                font-family:'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+                color:#555;
+                height: 842px;
+            }
+
+            .invoice-box table{
+                width:100%;
+                line-height:inherit;
+                text-align:left;
+            }
+
+            .invoice-box table td{
+                padding:5px;
+                vertical-align:top;
+            }
+
+            .invoice-box table tr td:nth-child(2){
+                text-align:left;
+            }
+
+            .invoice-box table tr.top table td{
+                padding-bottom:20px;
+            }
+
+            .invoice-box table tr.top table td.title{
+                font-size:45px;
+                line-height:45px;
+                color:#333;
+            }
+
+            .invoice-box table tr.information table td{
+                padding-bottom:40px;
+            }
+
+            .invoice-box table tr.heading td{
+                background:#eee;
+                border-bottom:1px solid #ddd;
+                font-weight:bold;
+            }
+
+            .invoice-box table tr.details td{
+                padding-bottom:20px;
+            }
+
+            .invoice-box table tr.item td{
+                border-bottom:1px solid #eee;
+            }
+
+            .invoice-box table tr.item.last td{
+                border-bottom:none;
+            }
+
+            .invoice-box table tr.total td:nth-child(2){
+                border-top:2px solid #eee;
+                font-weight:bold;
+            }
+            tr{
+                border-bottom: 2px solid #eee !important;
+            }
+
+            @media only screen and (max-width: 600px) {
+                .invoice-box table tr.top table td{
+                    width:100%;
+                    display:block;
+                    text-align:center;
+                }
+
+                .invoice-box table tr.information table td{
+                    width:100%;
+                    display:block;
+                    text-align:center;
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <div class="invoice-box">
+            <table cellpadding="0" cellspacing="0" class="table table-striped">
+                <tr class="top">
+                    <td colspan="5">
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                     
+                        <table>
+                            <tr>
+                                <td >
+                                    <h2> BULLETIN DE PAIE</h2>  
+                                </td>
+                                <td style="text-align: right">
+                                    Date: {{ 'now'|date('d/m/Y') }}  &nbsp; &nbsp;  
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+
+                <tr class="information">
+                    <td colspan="2">
+                        <table>
+                            <tr>
+                                <td style="text-align: left">
+                                    <strong>Periode:</strong>&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;du  {{ entity.dated|date('d/m/Y') }} au  {{ entity.datef|date('d/m/Y') }}<br />
+                                    <strong>Emploi :</strong>&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ employe.fonction  }} <br />
+                                    <strong>Matricule :</strong>&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;{{ employe.matemp }} <br />
+                                    <strong>Nationalité :</strong>&nbsp; &nbsp; &nbsp;&nbsp;{{ employe.natemp  }}<br />
+                                </td>
+
+                                <td>
+                                </td>
+                            </tr>
+                        </table>
+
+                    </td>
+
+
+                    <td colspan="2" >
+                        <table>
+                            <tr>
+                                <td style="text-align: right">
+                                    <strong>Mensualité</strong> : 1 mois<br />
+                                    <strong>Nom : &nbsp;&nbsp; &nbsp; {{ employe.nomemp  }} </strong><br />
+                                    <strong>Prenom : &nbsp;{{ employe.prenomemp  }}</strong><br />
+                                    <strong>Opération:  &nbsp;{{ entity.libbanque}}</strong><br />
+                                </td>
+
+                                <td>
+                                </td>
+                            </tr>
+                        </table>
+
+                    </td>
+
+                </tr>
+
+                {# les produits #}
+                {% set totalR = 0 %}
+                {% set totalG = 0 %}
+
+                <tr class="heading">
+                    <td width="30%">Composante</td>
+                    <td width="20%">Taux</td>
+                    <td width="10%">Gains</td>
+                    <td width="20%">Retenues</td>
+                </tr>
+                <tr>
+                    <td width="30%">Salaire de Base</td>
+                    <td>100%</td>
+                    <td>{{ employe.salbase }}</td>
+                </tr>
+
+                {%for compo in entity.salairecompoTable%}  
+                    <tr class="even pointer" >
+                        <td>{{ compo.composante }}</td>
+                        <td>{{ compo.taux }} </td>	
+                        {% if compo.taux > 0 %}  
+                            {% set quota = (employe.salbase * compo.taux)/100 %}
+                            {% if compo.type=='retenue' %} 
+                                <td></td>							 
+                                <td> {{ quota }}</td>
+                                {% set totalR = totalR + quota %}
+                            {% else %}
+                                <td>{{ quota }}</td>
+                                <td></td>	
+                                {% set totalG = totalG + quota %}								 
+                            {% endif %}
+                        {% else %}
+                            {% if compo.type=='retenue'  %} 
+                                {% set quota = compo.montant %}	
+                                <td></td>
+                                <td>{{ quota }}</td>
+                                {% set totalR = totalR + quota %}								 
+                            {% else %}
+                                {% set quota = compo.montant %}
+                                <td>{{ quota }}</td>
+                                <td></td>
+                                {% set totalG = totalG + quota %}	
+                            {% endif %}
+                        {% endif %}
+
+                    </tr>
+
+                {% endfor %}
+                <tr   style="font-size:18px;color:black;">	
+
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+
+
+                </tr>
+
+                <tr   style="font-size:18px;color:black;">	
+
+                    <td></td>
+                    <td></td>
+                    <td>Total Retenue:</td>
+                    <td><b>{{ totalR }} FCFA</b></td>
+
+
+                </tr>
+                <tr  style="font-size:18px;color:black;">	
+
+                    <td></td>
+                    <td></td>
+                    <td >Total Gain:</td>
+                    <td><b>{{ totalG }} FCFA</b></td>
+                </tr>
+
+
+                <tr  style="color: black;">
+
+                    <td></td>
+                    <td></td>
+                    <td width="30%"><h3>Salaire NET à Payer:</h3></td>
+                    <td><h3>{{ employe.salbase - totalR + totalG  }} FCFA</h3></td>
+                </tr>
+
+
+            </table>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <table >
+                <tr>
+                    <td style="text-align: right; font-size: 18px;">
+                <u>Le directeur Général</u>
+                </td>
+
+                </tr>
+            </table>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,30 @@
+detailsproduits:
+    path:     /
+    defaults: { _controller: "VentesBundle:DetailsProduits:index" }
+
+detailsproduits_show:
+    path:     /{id}/show
+    defaults: { _controller: "VentesBundle:DetailsProduits:show" }
+
+detailsproduits_new:
+    path:     /new
+    defaults: { _controller: "VentesBundle:DetailsProduits:new" }
+
+detailsproduits_create:
+    path:     /create
+    defaults: { _controller: "VentesBundle:DetailsProduits:create" }
+    methods:  POST
+
+detailsproduits_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "VentesBundle:DetailsProduits:edit" }
+
+detailsproduits_update:
+    path:     /{id}/update
+    defaults: { _controller: "VentesBundle:DetailsProduits:update" }
+    methods:  [POST, PUT]
+
+detailsproduits_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "VentesBundle:DetailsProduits:delete" }
+    methods:  [POST, DELETE]

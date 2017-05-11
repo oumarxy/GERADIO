@@ -1,0 +1,36 @@
+cvupload:
+    path:     /{idemp}/
+    defaults: { _controller: "GestionBundle:Cvupload:index" }
+    requirements:
+        idemp: \d+
+
+cvupload_show:
+    path:     /{id}/show
+    defaults: { _controller: "GestionBundle:Cvupload:show" }
+
+cvupload_new:
+    path:     /{idemp}/new
+    defaults: { _controller: "GestionBundle:Cvupload:new" }
+    requirements:
+        idemp: \d+
+
+cvupload_create:
+    path:     /{idemp}/create
+    defaults: { _controller: "GestionBundle:Cvupload:create" }
+    methods:  POST
+    requirements:
+        idemp: \d+
+
+cvupload_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "GestionBundle:Cvupload:edit" }
+
+cvupload_update:
+    path:     /{id}/update
+    defaults: { _controller: "GestionBundle:Cvupload:update" }
+    methods:  [POST, PUT]
+
+cvupload_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "GestionBundle:Cvupload:delete" }
+    methods:  [POST, DELETE]

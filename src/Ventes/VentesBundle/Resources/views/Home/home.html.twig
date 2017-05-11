@@ -1,0 +1,115 @@
+{% extends "VentesBundle::layout_ventes.html.twig" %}
+
+ {% block container_ventes %}
+     <script src="{{ asset('design/dist/js/jQuery1.7.1.min.js') }}"></script>
+     <script src="{{ asset('design/dist/js/highcharts.js') }}"></script>
+     <script src="{{ asset('design/dist/js/exporting.js') }}"></script>
+     <!-- page content -->
+     <div role="main">
+
+         <div class="">
+
+             <div class="row top_tiles">
+                 <div class="animated .fadeIn col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                     <div class="tile-stats">
+                         <div class="icon"><i class="fa fa-signal"></i>
+                         </div>
+                         <div class="count" style="font-size: 30px !important;"><span class="timer" data-from="0" data-to="{{ chiffreAffaireAujourdhui }}"></span></div>
+
+                         <h3>C.A.</h3>
+                         <p>Aujourd'hui</p>
+                     </div>
+                 </div>
+                 <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                     <div class="tile-stats">
+                         <div class="icon"><i class="fa fa-line-chart"></i>
+                         </div>
+                         <div class="count" style="font-size: 30px !important;"><span class="timer" data-from="0" data-to="{{ chiffreAffaireAnnee }}"></span></div>
+
+                         <h3>C.A.</h3>
+                         <p>Cette année</p>
+                     </div>
+                 </div>
+                 <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                     <div class="tile-stats">
+                         <div class="icon"><i class="fa fa-compass"></i>
+                         </div>
+                         <div class="count" style="font-size: 30px !important;"><span class="timer" data-from="0" data-to="{{ totalVenduDuJour }}"></span></div>
+
+                         <h3>Services</h3>
+                         <p>Total des services rendus aujourd'hui.</p>
+                     </div>
+                 </div>
+                 <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                     <div class="tile-stats">
+                         <div class="icon"><i class="fa fa-sort-amount-desc"></i>
+                         </div>
+                         <div class="count" style="font-size: 30px !important;"><span class="timer" data-from="0" data-to="{{ totalFactureImpayee }}"></span></div>
+
+                         <h3>Factures </h3>
+                         <p>Les impayées ou en cours de paiement.</p>
+                     </div>
+                 </div>
+
+             </div>
+
+             <div class="row">
+                 <script type="text/javascript">
+                     {{ chart(chart) }}
+                 </script>
+                 <div id="idlinechart" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
+                 <div class="row">&nbsp;</div>
+             </div>
+
+             <div class="row">
+
+                 <div class="col-md-6">
+                     <script type="text/javascript">
+                         {{ chart(banqueCaisse) }}
+                     </script>
+                     <div id="banqueCaissePie"></div>
+                 </div>
+
+                 <div class="col-md-6">
+                     <script type="text/javascript">
+                         {{ chart(creditComptant) }}
+                     </script>
+                     <div id="creditComptantPie"></div>
+                 </div>
+
+
+                 <div class="row">&nbsp;</div>
+             </div>
+                      <div class="row">&nbsp;</div>
+                      <div class="clearfix"></div>
+                     <div class="row">
+                           <div class="col-md-12">
+                     <script type="text/javascript">
+                         {{ chart(categorieProduit) }}
+                     </script>
+                     <div id="categorieProduitPie"></div>
+                 </div>
+                     </div>
+         </div>
+     </div>
+     <!-- /page content -->
+     {% block javascript %}
+         <script src="{{ asset('design/dist/js/jquery.countTo.js') }}"></script>
+         <script type="text/javascript">
+             $('.timer').countTo({
+                 speed: 2000,
+                 refreshInterval: 25,
+                 formatter: function (value, options) {
+                     return value.toFixed(options.decimals).replace(/\B(?=(?:\d{3})+(?!\d))/g, ' ');
+                 },
+                 onUpdate: function (value) {
+                     console.debug(this);
+                 },
+                 onComplete: function (value) {
+                     console.debug(this);
+                 }
+             });
+         </script>
+     {% endblock %}
+
+ {% endblock %}

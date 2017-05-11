@@ -1,0 +1,30 @@
+categorieclient:
+    path:     /
+    defaults: { _controller: "VentesBundle:CategorieClient:index" }
+
+categorieclient_show:
+    path:     /{id}/show
+    defaults: { _controller: "VentesBundle:CategorieClient:show" }
+
+categorieclient_new:
+    path:     /new
+    defaults: { _controller: "VentesBundle:CategorieClient:new" }
+
+categorieclient_create:
+    path:     /create
+    defaults: { _controller: "VentesBundle:CategorieClient:create" }
+    methods:  POST
+
+categorieclient_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "VentesBundle:CategorieClient:edit" }
+
+categorieclient_update:
+    path:     /{id}/update
+    defaults: { _controller: "VentesBundle:CategorieClient:update" }
+    methods:  [POST, PUT]
+
+categorieclient_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "VentesBundle:CategorieClient:delete" }
+    methods:  [POST, DELETE]

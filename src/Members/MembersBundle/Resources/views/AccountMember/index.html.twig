@@ -1,0 +1,53 @@
+{% extends 'MembersBundle::layout_member.html.twig' %}
+
+{% block container_member %} 
+    <h1>Listes des utilisateurs</h1>
+    <div class="divider"></div>
+    <div class="row">
+    <div class="col-md-9">
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Utilisateur</th>
+                <th>Email</th>
+                <th>Roles</th>
+                <th>Etat</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td>{{ entity.username }}</td>
+                <td>{{ entity.email }}</td>
+                <td>{% for role in entity.roles %}{% if role != 'ROLE_USER' %} {{ role }} <br /> {% endif %} {% endfor %}</td>
+                <td>{% if entity.enabled %} <span class="label label-info">Activé</span> {% else %}  <span class="label label-warning">Désactivé</span>{% endif %}</td>
+                <td>
+               <div class="btn-group">
+                            <button type="button" data-toggle="dropdown" class="btn btn-default">Actions</button>
+                            <button type="button" data-toggle="dropdown" class="btn btn-default dropdown-toggle"><span class="caret"></span></button>
+                            <ul class="dropdown-menu">
+                    <li>
+                        <a href="{{ path('account_show', { 'id': entity.id }) }}">Voir</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('account_edit', { 'id': entity.id, 'status': 'infoperso' }) }}">Modifier</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('account_edit', { 'id': entity.id, 'status': 'pwd' }) }}">Modifier Password</a>
+                    </li>
+                </ul>
+               </div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+    </div>
+       
+        <a class="btn btn-success" href="{{ path('account_new') }}">
+            Ajouter
+        </a>
+
+    {% endblock %}

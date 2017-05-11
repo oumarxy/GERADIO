@@ -1,0 +1,82 @@
+{% extends "VentesBundle::layout_ventes.html.twig" %}
+
+{% block container_ventes %} 
+    <h1>Encaissement</h1>
+    <div class="row">
+        <div class="col-md-5">
+            {% set total_deja_encaisse = 0 %}
+            <table class="table table-bordered table-striped table-hover">
+                <tbody>
+                    <tr>
+                        <th>Numero</th>
+                        <td>{{ entity.facture.numero }}</td>
+                    </tr>
+                    <tr>
+                        <th>Type Facture</th>
+                        <td>{{ entity.facture.typeFacture }}</td>
+                    </tr>
+                    <tr>
+                        <th>Total facture</th>
+                        <td>{{ entity.facture.totalFacture|number_format(0,',',' ') }} F CFA</td>
+                    </tr>
+                    <tr>
+                        <th>Reste à payer</th>
+                            {% for encaissement in entity.facture.encaissement %}
+                                {% set total_deja_encaisse = total_deja_encaisse + encaissement.montant  %}
+                            {% endfor %}
+                        <td>{{ (entity.facture.totalFacture - total_deja_encaisse)|number_format(0,',',' ') }} F CFA</td>
+                    </tr>
+                    <tr>
+                        <th>Date</th>
+                        <td>{% if entity.facture.dateFacture %}{{ entity.facture.dateFacture|date('d/m/Y') }}{% endif %}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+        <div class="col-md-5">
+            <table class="table table-hover table-striped">
+                <tbody>
+                    <tr>
+                        <th>Identifiant</th>
+                        <td>{{ entity.id }}</td>
+                    </tr>
+                    <tr>
+                        <th>Montant</th>
+                        <td>{{ entity.montant|number_format(0,',',' ') }}</td>
+                    </tr>
+                    <tr>
+                        <th>Date</th>
+                        <td>{{ entity.date|date('d/m/Y H:i:s') }}</td>
+                    </tr>
+                    <tr>
+                        <th>Mode</th>
+                        <td>{{ entity.mode }}</td>
+                    </tr>
+                    <tr>
+                        <th>Destination</th>
+                        <td>{{ entity.destination }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        {%if entity.utilisateur is not null %} 
+            <div class="col-md-4">
+                <div class="">Dernière modification effectuée par: {{entity.utilisateur.username|capitalize}}</div>
+                <div class="">Le {{entity.lastUpdate|date('d/m/Y')}} à {{entity.lastUpdate|date('H:i:s')}}</div>
+            </div>
+        {% endif %}
+    </div>
+    <a class="btn btn-primary btn-sm" href="{{ path('facture', { 'idcli': entity.facture.client.id, 'etat':'facture' }) }}">
+        Retour
+    </a>
+
+    <a class="btn btn-primary btn-sm" href="{{ path('encaissement', {'idfacture': entity.facture.id }) }}">
+        Voir ses paiements
+    </a>
+
+       <a class="btn btn-primary btn-sm" target='_blank' href="{{ path('encaissement_single_etat', { 'idencaiss': entity.id }) }}">
+          <i class="fa fa-file-pdf-o"></i>  Générer le recu
+        </a>
+    
+{% endblock %}

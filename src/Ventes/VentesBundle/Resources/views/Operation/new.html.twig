@@ -1,0 +1,27 @@
+{% extends "VentesBundle::layout_ventes.html.twig" %}
+
+{% block container_ventes %}
+    <h4>Nouvelle opération</h4>
+    <div class="row">
+        {{ form_start(form) }}
+        <div class="col-md-6">
+            {{ form_row(form.flux) }}
+            {{ form_row(form.nature) }}
+            {{ form_row(form.dateOperation) }}
+            {{ form_row(form.nom) }}
+        </div>
+        <div class="col-md-6">
+            {{ form_row(form.fonctionpersonres) }}
+            {{ form_row(form.telephone) }}
+            {{ form_row(form.montant) }}
+            {{ form_row(form.libelle) }}
+        </div>
+        <div class="col-md-12">
+            {{ form_row(form.description) }}
+        </div>
+        <div class="col-md-12">
+            {{ form_row(form.submit, {'label':'Valider', 'attr':{'class':'btn btn-primary margin'} }) }}
+        </div>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

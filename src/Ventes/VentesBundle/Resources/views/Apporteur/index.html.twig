@@ -1,0 +1,38 @@
+{% extends "VentesBundle::layout_ventes.html.twig" %}
+
+{% block container_ventes %}
+    <h3>Liste apporteurs</h3>
+
+    <table class="table table-striped table-hover liste">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Téléphone</th>
+                <th>Email</th>
+                <th>Fonction</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entity in entities %}
+                <tr>
+                    <td>{{ entity.nomapporteur }}</td>
+                    <td>{{ entity.prenomapporteur }}</td>
+                    <td>{{ entity.telephone }}</td>
+                    <td>{{ entity.email }}</td>
+                    <td>{{ entity.fonction }}</td>
+                    <td>
+                        <a class="btn btn-primary btn-xs" href="{{ path('apporteur_show', { 'id': entity.id }) }}"> <i class="fa fa-eye"></i> Voir </a>&nbsp;
+                        <a class="btn btn-success btn-xs" href="{{ path('apporteur_edit', { 'id': entity.id }) }}"> <i class="fa fa-edit"></i>  Modifier</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+            <a class="btn btn-primary" href="{{ path('apporteur_new') }}">
+               Nouvel apporteur
+            </a>
+        
+{% endblock %}

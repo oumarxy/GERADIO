@@ -1,0 +1,3 @@
+ventes_homepage:
+    path:     /
+    defaults: { _controller: VentesBundle:Home:home }

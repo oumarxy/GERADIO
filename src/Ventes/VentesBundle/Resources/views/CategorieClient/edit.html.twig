@@ -1,0 +1,14 @@
+{% extends "VentesBundle::layout_ventes.html.twig" %}
+
+ {% block container_ventes %}
+     
+    <h1>Modifier Catégorie</h1>
+    <div class="row">
+    <div class="col-md-5">
+    {{ form(edit_form) }}
+    </div>
+    </div>
+  <a class="btn btn-primary" href="{{ path('categorieclient') }}">
+            Retour
+        </a>
+{% endblock %}

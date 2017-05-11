@@ -1,0 +1,66 @@
+{% extends "VentesBundle::layout_ventes.html.twig" %}
+
+{% block container_ventes %}
+    <h3>Opération</h3>
+    <div class="row">
+        <div class="col-md-4">
+            <table class="table table-striped table-hover">
+                <tbody>
+                    <tr>
+                        <th>Flux</th>
+                        <td>{{ entity.flux }}</td>
+                    </tr>
+                    <tr>
+                        <th>Nature</th>
+                        <td>{{ entity.nature }}</td>
+                    </tr>
+                    <tr>
+                        <th>Nom</th>
+                        <td>{{ entity.nom }}</td>
+                    </tr>
+                    <tr>
+                        <th>Fonction</th>
+                        <td>{{ entity.fonctionpersonres }}</td>
+                    </tr>
+                    <tr>
+                        <th>Téléphone</th>
+                        <td>{{ entity.telephone }}</td>
+                    </tr>
+                    <tr>
+                        <th>Montant</th>
+                        <td>{{ entity.montant }}</td>
+                    </tr>
+                    <tr>
+                        <th>Date</th>
+                        <td>{% if entity.dateOperation %}{{ entity.dateOperation|date('Y-m-d H:i:s') }}{% endif %}</td>
+                    </tr>
+                </tbody>
+            </table>
+                     <a class="btn btn-primary" href="{{ path('operation') }}">
+            Retour
+        </a>
+        <a  class="btn btn-success" href="{{ path('operation_edit', { 'id': entity.id }) }}">
+            Modifier
+        </a>
+        <a  class="btn btn-success" target="_blank" href="{{ path('operation_bon_caisse', {'idop': entity.id }) }}">
+            <i class="fa fa-file-pdf-o"></i>  Générer
+        </a>
+        </div>
+        <div class="col-md-8">
+            <div class="page-header">
+                Motif: {{ entity.libelle|capitalize }}
+            </div>
+            <div class="panel-body">
+                <div class="panel-title">
+                    Description:
+                </div>
+                <div class="panel-body panel panel-primary">
+
+                    {{ entity.description|raw }}
+                </div>
+            </div>
+        </div>
+
+       
+
+    {% endblock %}

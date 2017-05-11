@@ -1,0 +1,17 @@
+{% extends "VentesBundle::layout_ventes.html.twig" %}
+
+ {% block container_ventes %} 
+    <h1>Encaissement edit</h1>
+    <div class="row">
+        <div class="col-md-5">
+    {{ form(edit_form) }}
+        </div>
+        </div>
+    <a class="btn btn-primary btn-sm" href="{{ path('facture', { 'idcli': entity.facture.client.id }) }}">
+        Retour
+    </a>
+
+    <a class="btn btn-primary btn-sm" href="{{ path('encaissement', {'idfacture': entity.facture.id }) }}">
+        Voir ses paiements
+    </a>
+{% endblock %}

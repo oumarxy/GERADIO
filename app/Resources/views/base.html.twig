@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Ge Radio {% endblock %} ~ Online</title>
+
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+        <link rel="stylesheet" href="{{asset('/design/bootstrap/css/bootstrap.min.css')}}">
+        <link rel="stylesheet" href="{{asset('/design/bootstrap/css/jquery.datetimepicker.css')}}">
+        <link rel="stylesheet" href="{{asset('/design/bootstrap/css/dataTables.bootstrap.min.css')}}">
+        <link href="{{asset('/design/dist/css/font-awesome.min.css')}}" rel="stylesheet">
+        <link href="{{asset('/design/dist/css/custom.css')}}" rel="stylesheet">
+        <link href="{{asset('/design/dist/css/add.css')}}" rel="stylesheet">
+    {% block stylesheets %}{% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{asset('ge.png')}}" />
+</head>
+<body class="nav-md">
+
+    {% block body %} {% endblock %}
+
+    <script src="{{asset('design/bootstrap/js/jquery.js')}}"></script>
+    <script src="{{asset('design/bootstrap/js/bootstrap.min.js')}}"></script>
+    <script src="{{asset('design/bootstrap/js/jquery.dataTables.min.js')}}"></script>
+    <script src="{{asset('design/bootstrap/js/dataTables.bootstrap.min.js')}}"></script>
+    <script src="{{asset('design/bootstrap/js/jquery.datetimepicker.full.min.js')}}"></script>
+    <script src="{{asset('design/dist/js/custom.js')}}"></script>
+    <script src="{{asset('design/dist/js/jquery.inputmask.bundle.min.js')}}"></script>
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
+    <script src="{{asset('design/dist/js/add.js')}}"></script>
+{% block javascript %} {% endblock %}
+</body>
+</html>

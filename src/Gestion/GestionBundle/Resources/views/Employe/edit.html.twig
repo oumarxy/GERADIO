@@ -1,0 +1,50 @@
+{% extends 'GestionBundle::layout_gestion.html.twig' %}
+
+{% block container_gestion %} 
+    <h3>Modification employé</h3>
+
+    <div class="row">
+        {{ form_start(edit_form) }}
+        <div class="col-md-4">
+            {{ form_row(edit_form.civilitemp, {'label':'Civilité'}) }}
+            {{ form_row(edit_form.nomemp, {'label':'Nom Employé'}) }}
+            {{ form_row(edit_form.prenomemp, {'label':'Prenom Employé'}) }}
+            {{ form_row(edit_form.matemp, {'label':'Matricule Employé'}) }}
+            {{ form_row(edit_form.genremp, {'label':'Genre Employé'}) }}
+            {{ form_row(edit_form.natemp, {'label':'Nationalité Employé'}) }}
+            {{ form_row(edit_form.dobemp, {'label':'Date de Naissance'}) }}
+            {{ form_row(edit_form.lieuemp, {'label':'Lieu'}) }}
+
+        </div>
+        <div class="col-md-4">
+            {{ form_row(edit_form.lieuemp, {'label':'Lieu'}) }}
+            {{ form_row(edit_form.statuemp, {'label':'Status matrimonial'}) }} 
+            {{ form_row(edit_form.adressemp, {'label':'Adresse'}) }} 
+            {{ form_row(edit_form.nbreftemp, {'label':'Nombre enfant'}) }}
+            {{ form_row(edit_form.fonction) }}	 
+            {{ form_row(edit_form.etude) }}
+            {{ form_row(edit_form.grade) }}
+            {{ form_row(edit_form.service)}}
+            {{ form_row(edit_form.salbase, {'label':'Salaire de base'})}}
+
+        </div>
+
+        <div class="col-md-4">
+            {{ form_row(edit_form.celemp, {'label':'Cellulaire Employé'}) }}
+            {{ form_row(edit_form.telemp, {'label':'Telephone Employé'}) }}
+            {{ form_row(edit_form.emailemp, {'label':'Email Employé'}) }}
+            {{ form_row(edit_form.perscont, {'label':'Personne à contacter'}) }}
+            {{ form_row(edit_form.telpers, {'label':'Téléphone'}) }}
+            {{ form_row(edit_form.celpers, {'label':'Cellulaire'}) }}
+            {{ form_row(edit_form.filiationemp, {'label':'Affiliation'}) }}
+            {{ form_row(edit_form.file, {'label':'Photo de profil (100 * 100)'}) }} 
+            {{ form_widget(edit_form._token) }}
+            {{ form_row(edit_form.submit) }}
+        </div>
+        {{ form_end(edit_form) }}
+    </div>
+    <div class="divider"></div>
+    <a href="{{ path('employe') }}" class="btn btn-success"><i class="fa fa-cancel m-right-xs"></i>
+        Retour
+    </a>
+{% endblock %}

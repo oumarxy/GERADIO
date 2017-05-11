@@ -1,0 +1,33 @@
+
+
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="nav-md">
+
+    <div class="container body">
+
+        <div class="main_container">
+
+            <!-- page content -->
+            <div class="col-md-12">
+                <div class="col-middle">
+                    <div class="text-center text-center">
+                        <h1 class="error-number">404</h1>
+                        <h2>Désolé, nous n'avons pas pu traiter votre requête.</h2>
+                        <p>Vérifiez les valeurs saisies ou adressez vous au service informatique.</p>
+                        <div class="clearfix"></div>
+                        <h2><a href="{{ path('ventes_accueil')}}">Retour à l'accueil</<a></h2>
+                   
+                    </div>
+                </div>
+            </div>
+            <!-- /page content -->
+
+        </div>
+        <!-- footer content -->
+    </div>
+    <!-- /footer content -->
+</div>
+
+{% endblock body %}

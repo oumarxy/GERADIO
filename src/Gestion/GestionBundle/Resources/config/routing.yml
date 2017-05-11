@@ -1,0 +1,55 @@
+gestion_directeur:
+    resource: "@GestionBundle/Resources/config/routing/directeur.yml"
+    prefix:   /directeur
+
+gestion_cvupload:
+    resource: "@GestionBundle/Resources/config/routing/cvupload.yml"
+    prefix:   /cvupload
+
+gestion_sanction:
+    resource: "@GestionBundle/Resources/config/routing/sanction.yml"
+    prefix:   /sanction
+
+gestion_salairecompo:
+    resource: "@GestionBundle/Resources/config/routing/salairecompo.yml"
+    prefix:   /salairecompo
+
+gestion_mission:
+    resource: "@GestionBundle/Resources/config/routing/mission.yml"
+    prefix:   /mission
+
+gestion_banque:
+    resource: "@GestionBundle/Resources/config/routing/banque.yml"
+    prefix:   /salaire
+
+gestion_absence:
+    resource: "@GestionBundle/Resources/config/routing/absence.yml"
+    prefix:   /absence
+
+gestion_conge:
+    resource: "@GestionBundle/Resources/config/routing/conge.yml"
+    prefix:   /conge
+
+gestion_contrat:
+    resource: "@GestionBundle/Resources/config/routing/contrat.yml"
+    prefix:   /contrat
+
+gestion_grade:
+    resource: "@GestionBundle/Resources/config/routing/grade.yml"
+    prefix:   /grade
+
+gestion_etude:
+    resource: "@GestionBundle/Resources/config/routing/etude.yml"
+    prefix:   /etude
+
+gestion_service:
+    resource: "@GestionBundle/Resources/config/routing/service.yml"
+    prefix:   /service
+
+gestion_fonction:
+    resource: "@GestionBundle/Resources/config/routing/fonction.yml"
+    prefix:   /fonction
+
+gestion_employe:
+    resource: "@GestionBundle/Resources/config/routing/employe.yml"
+    prefix:   /employe

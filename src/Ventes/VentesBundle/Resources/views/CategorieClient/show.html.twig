@@ -1,0 +1,29 @@
+{% extends "VentesBundle::layout_ventes.html.twig" %}
+
+ {% block container_ventes %}
+    <h1>Catégorie client</h1>
+    <div class="row">
+    <div class="col-md-5">
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Identifiant</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Libelle</th>
+                <td>{{ entity.libelle }}</td>
+            </tr>
+        </tbody>
+    </table>
+    </div>   
+    </div>   
+      <a class="btn btn-primary" href="{{ path('categorieclient') }}">
+            Retour
+        </a>
+        <a class="btn btn-success" href="{{ path('categorieclient_edit', { 'id': entity.id }) }}">
+            Modifier
+        </a>
+   
+
+{% endblock %}

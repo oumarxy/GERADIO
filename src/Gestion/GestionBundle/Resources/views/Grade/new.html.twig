@@ -1,0 +1,15 @@
+{% extends 'GestionBundle::layout_gestion.html.twig' %}
+
+{% block container_gestion %} 
+    <h1>Grade creation</h1>
+
+    {{ form(form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a class="btn btn-primary" href="{{ path('grade') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+{% endblock %}

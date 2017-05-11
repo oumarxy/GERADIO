@@ -1,0 +1,35 @@
+{% extends 'MembersBundle::layout_member.html.twig' %}
+
+{% block container_member %} 
+    <h1>Modification utilisateur </h1>
+    <div class="divider"></div>
+    <div class="row">
+        {{ form_start(edit_form) }}
+        <div class="col-md-5">
+            <h3>Informations personnelles </h3>
+            {{ form_row(edit_form.username) }}
+            {{ form_row(edit_form.email) }}
+            {% if status == 'pwd' %}
+        {{ form_row(edit_form.plainPassword) }}
+        {% endif %}
+            {{ form_row(edit_form.enabled) }} 
+            {{form_row(edit_form.submit, { "label": "Enregister" })}}
+        </div>
+        <div class="col-md-5 col-md-offset-1">
+            <h3>Gestion des privilèges </h3>
+            {{ form_row(edit_form.roles) }}
+        </div>
+
+        {{ form_widget(edit_form._token) }} 
+        {{ form_end(edit_form, {'render_rest': false})}}
+    </div>
+
+    
+    <div class="divider"></div>
+    <div class="clearfix"></div>
+    
+    <a class="btn btn-success" href="{{ path('account') }}">
+        Liste utilisateurs
+    </a>
+
+{% endblock %}

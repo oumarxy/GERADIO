@@ -1,0 +1,30 @@
+salairecompo:
+    path:     /
+    defaults: { _controller: "GestionBundle:salairecompo:index" }
+
+salairecompo_show:
+    path:     /{id}/show
+    defaults: { _controller: "GestionBundle:salairecompo:show" }
+
+salairecompo_new:
+    path:     /new
+    defaults: { _controller: "GestionBundle:salairecompo:new" }
+
+salairecompo_create:
+    path:     /create
+    defaults: { _controller: "GestionBundle:salairecompo:create" }
+    methods:  POST
+
+salairecompo_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "GestionBundle:salairecompo:edit" }
+
+salairecompo_update:
+    path:     /{id}/update
+    defaults: { _controller: "GestionBundle:salairecompo:update" }
+    methods:  [POST, PUT]
+
+salairecompo_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "GestionBundle:salairecompo:delete" }
+    methods:  [POST, DELETE]

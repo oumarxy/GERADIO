@@ -1,0 +1,36 @@
+contrat:
+    path:     /{idemp}/
+    defaults: { _controller: "GestionBundle:Contrat:index" }
+    requirements:
+        idemp: \d+
+
+contrat_show:
+    path:     /{id}/show
+    defaults: { _controller: "GestionBundle:Contrat:show" }
+
+contrat_new:
+    path:     /{idemp}/new
+    defaults: { _controller: "GestionBundle:Contrat:new" }
+    requirements:
+        idemp: \d+
+
+contrat_create:
+    path:     /{idemp}/create
+    defaults: { _controller: "GestionBundle:Contrat:create" }
+    methods:  POST
+    requirements:
+        idemp: \d+
+
+contrat_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "GestionBundle:Contrat:edit" }
+
+contrat_update:
+    path:     /{id}/update
+    defaults: { _controller: "GestionBundle:Contrat:update" }
+    methods:  [POST, PUT]
+
+contrat_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "GestionBundle:Contrat:delete" }
+    methods:  [POST, DELETE]

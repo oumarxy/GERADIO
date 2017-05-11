@@ -1,0 +1,34 @@
+apporteur:
+    path:     /
+    defaults: { _controller: "VentesBundle:Apporteur:index" }
+
+apporteur_show:
+    path:     /{id}/show
+    defaults: { _controller: "VentesBundle:Apporteur:show" }
+
+apporteur_etat:
+    path:     /{idap}/etat/apporteur
+    defaults: { _controller: "VentesBundle:Apporteur:caApporteur" }
+
+apporteur_new:
+    path:     /new
+    defaults: { _controller: "VentesBundle:Apporteur:new" }
+
+apporteur_create:
+    path:     /create
+    defaults: { _controller: "VentesBundle:Apporteur:create" }
+    methods:  POST
+
+apporteur_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "VentesBundle:Apporteur:edit" }
+
+apporteur_update:
+    path:     /{id}/update
+    defaults: { _controller: "VentesBundle:Apporteur:update" }
+    methods:  [POST, PUT]
+
+apporteur_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "VentesBundle:Apporteur:delete" }
+    methods:  [POST, DELETE]

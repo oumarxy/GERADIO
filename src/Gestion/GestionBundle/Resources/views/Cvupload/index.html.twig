@@ -1,0 +1,101 @@
+{% extends 'GestionBundle::layout_gestion.html.twig' %}
+
+{% block container_gestion %} 
+    <h1>Consulter CV de {{ employe.nomemp  }} {{ employe.prenomemp  }}</h1>
+<button type="button" class="cvBTN btn btn-success" data-toggle="modal" data-target=".cv-modal-md">Télécharger cv (pdf)</button>
+     <hr />
+    <div class="row">
+        <div class="col-md-5">
+            <table class="table table-striped table-bordered">
+                <tbody>
+                     <tr>
+                        <td> 
+                              {% if employe.path is not null %}
+                                <img class="img-circle" src="{{ asset('uploads/profiles/' ~ employe.path)}}"  width="100" height="100">
+                            {% else %}
+                                <img class="img-circle" src="{{ asset('uploads/profiles/default.png')}}"  width="100" height="100">
+                            {% endif %}
+                        </td>
+                     </tr>
+                    <tr>
+                        <th> Nom employe</th>
+                        <td><strong class="text-uppercase">{{ employe.nomemp  }} {{ employe.prenomemp  }}</strong></td>
+                    </tr>
+                   
+                    <tr>
+                        <th>Activite</th>
+                        <td>{{ employe.fonction }}</td>
+                    </tr>
+					 <tr>
+                        <th>Email</th>
+                        <td>{{ employe.emailemp }}</td>
+                    </tr>
+                    <tr>
+                        <th>Téléphone</th>
+                        <td>{{ employe.telpers }}</td>
+                    </tr>
+                    <tr>
+                        <th>Cellulaire</th>
+                        <td> {{ employe.celemp }}</td>
+                    </tr>
+
+                </tbody>
+            </table>
+             <a class="btn btn-primary " href="{{ path('employe') }}">
+                                 retour
+                            </a>
+        </div>
+        <div class="col-md-7">
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Intitulé</th>
+                <th>Date</th>
+				<th>CV</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td>{{ entity.libellecv }}</td>
+                <td>{{ entity.date|date("d/m/Y")}}</td>
+				<td><a href="{{ asset('uploads/documents/' ~ entity.path) }}" target="blank"><i class="fa fa-eye"></i> Cv (PDF)</a></td>
+                <td>
+               
+                        <a class="btn btn-success btn-xs" href="{{ path('cvupload_edit', { 'id': entity.id }) }}">Modifier</a>
+                   
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+       </div>
+    </div>
+        {# le modal de gestion de cv #}
+
+    <div class="modal fade cv-modal-md" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                {{ form_start(form_cvupload) }}
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel2">Upload cv</h4>
+                </div>
+                <div class="modal-body">
+                    {{ form_row(form_cvupload.libellecv, {'label':'Intitulé'}) }}
+                    {{ form_row(form_cvupload.date) }}
+					 {{ form_row(form_cvupload.file,{'label':'cv en pdf'}) }} 
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default left" data-dismiss="modal">Fermer</button>
+                    {{form_row(form_cvupload.submit, { "label": "Confirmer" })}}
+                </div> 
+                {{ form_widget(form_cvupload._token) }} 
+                {{ form_end(form_cvupload, {'render_rest': false})}}
+            </div>
+        </div>
+    </div>
+    {% endblock %}

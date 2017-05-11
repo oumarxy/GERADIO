@@ -1,0 +1,311 @@
+<?php
+
+namespace Ventes\VentesBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * ContratLocation
+ *
+ * @ORM\Table()
+ * @ORM\Entity(repositoryClass="Ventes\VentesBundle\Repository\ContratLocationRepository")
+ */
+class ContratLocation
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="refLocation", type="string", length=50)
+     */
+    private $refLocation;
+
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dateDebut", type="datetime")
+     */
+    private $dateDebut;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dateFin", type="datetime")
+     */
+    private $dateFin;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="caution", type="float")
+     */
+    private $caution;
+    
+     /**
+     * @var float
+     *
+     * @ORM\Column(name="mensualite", type="float")
+     */
+    private $mensualite;
+
+    
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="periodicite", type="integer")
+     */
+    private $periodicite;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dateCreation", type="datetime")
+     */
+    private $dateCreation;
+
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dateProchainEncaissement", type="datetime")
+     */
+    private $dateProchainEncaissement;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="aPayer", type="float")
+     */
+    private $aPayer;
+
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set refLocation
+     *
+     * @param string $refLocation
+     * @return ContratLocation
+     */
+    public function setRefLocation($refLocation)
+    {
+        $this->refLocation = $refLocation;
+
+        return $this;
+    }
+
+    /**
+     * Get refLocation
+     *
+     * @return string 
+     */
+    public function getRefLocation()
+    {
+        return $this->refLocation;
+    }
+
+    /**
+     * Set dateDebut
+     *
+     * @param \DateTime $dateDebut
+     * @return ContratLocation
+     */
+    public function setDateDebut($dateDebut)
+    {
+        $this->dateDebut = $dateDebut;
+
+        return $this;
+    }
+
+    /**
+     * Get dateDebut
+     *
+     * @return \DateTime 
+     */
+    public function getDateDebut()
+    {
+        return $this->dateDebut;
+    }
+
+    public function __toString() {
+        return $this->getRefLocation();
+    }
+
+    /**
+     * Set dateFin
+     *
+     * @param \DateTime $dateFin
+     * @return ContratLocation
+     */
+    public function setDateFin($dateFin)
+    {
+        $this->dateFin = $dateFin;
+
+        return $this;
+    }
+
+    /**
+     * Get dateFin
+     *
+     * @return \DateTime 
+     */
+    public function getDateFin()
+    {
+        return $this->dateFin;
+    }
+
+    /**
+     * Set caution
+     *
+     * @param float $caution
+     * @return ContratLocation
+     */
+    public function setCaution($caution)
+    {
+        $this->caution = $caution;
+
+        return $this;
+    }
+
+    /**
+     * Get caution
+     *
+     * @return float 
+     */
+    public function getCaution()
+    {
+        return $this->caution;
+    }
+
+    /**
+     * Set periodicite
+     *
+     * @param integer $periodicite
+     * @return ContratLocation
+     */
+    public function setPeriodicite($periodicite)
+    {
+        $this->periodicite = $periodicite;
+
+        return $this;
+    }
+
+    /**
+     * Get periodicite
+     *
+     * @return integer 
+     */
+    public function getPeriodicite()
+    {
+        return $this->periodicite;
+    }
+
+    /**
+     * Set dateCreation
+     *
+     * @param \DateTime $dateCreation
+     * @return ContratLocation
+     */
+    public function setDateCreation($dateCreation)
+    {
+        $this->dateCreation = $dateCreation;
+
+        return $this;
+    }
+
+    /**
+     * Get dateCreation
+     *
+     * @return \DateTime 
+     */
+    public function getDateCreation()
+    {
+        return $this->dateCreation;
+    }
+
+    /**
+     * Set mensualite
+     *
+     * @param float $mensualite
+     * @return ContratLocation
+     */
+    public function setMensualite($mensualite)
+    {
+        $this->mensualite = $mensualite;
+
+        return $this;
+    }
+
+    /**
+     * Get mensualite
+     *
+     * @return float 
+     */
+    public function getMensualite()
+    {
+        return $this->mensualite;
+    }
+
+    /**
+     * Set dateProchainEncaissement
+     *
+     * @param \DateTime $dateProchainEncaissement
+     * @return ContratLocation
+     */
+    public function setDateProchainEncaissement($dateProchainEncaissement)
+    {
+        $this->dateProchainEncaissement = $dateProchainEncaissement;
+
+        return $this;
+    }
+
+    /**
+     * Get dateProchainEncaissement
+     *
+     * @return \DateTime 
+     */
+    public function getDateProchainEncaissement()
+    {
+        return $this->dateProchainEncaissement;
+    }
+
+    /**
+     * Set aPayer
+     *
+     * @param float $aPayer
+     * @return ContratLocation
+     */
+    public function setAPayer($aPayer)
+    {
+        $this->aPayer = $aPayer;
+
+        return $this;
+    }
+
+    /**
+     * Get aPayer
+     *
+     * @return float 
+     */
+    public function getAPayer()
+    {
+        return $this->aPayer;
+    }
+}

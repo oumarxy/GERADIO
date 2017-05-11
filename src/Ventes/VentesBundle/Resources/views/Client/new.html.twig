@@ -1,0 +1,34 @@
+{% extends "VentesBundle::layout_ventes.html.twig" %}
+
+ {% block container_ventes %} 
+  
+        <div class="row">
+            <div class="col-md-5 col-md-offset-1" >
+                <h3>Ajout Client </h3>
+            </div>
+        </div>
+    <div class="row">
+        {{ form_start(form) }}
+        <div class="col-md-5 col-md-offset-1" >
+            {{ form_row(form.categorie) }}
+            {{ form_row(form.nom) }}
+            {{ form_row(form.adresse) }}
+            {{ form_row(form.telephone) }}
+            {{ form_row(form.mail) }}
+            {{ form_row(form.siteweb) }}
+            {{ form_row(form.activite) }}
+        </div>
+        <div class="col-md-5">
+            {{ form_rest(form) }}
+        </div>
+        {{ form_widget(form._token) }} 
+        {{ form_end(form, {'label':'Ajouter', 'render_rest': false})}}
+    </div>
+        <div class="row">
+            <div class="col-md-5 col-md-offset-1" >
+                <a class="btn btn-primary"  href="{{ path('client') }}">
+                    Retour
+                </a>
+            </div>
+        </div>
+{% endblock %}

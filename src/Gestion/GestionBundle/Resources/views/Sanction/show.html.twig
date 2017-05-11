@@ -1,0 +1,35 @@
+{% extends 'GestionBundle::layout_gestion.html.twig' %}
+
+{% block container_gestion %}
+    <h1>Sanction</h1>
+
+    <div class="row">
+        <div class="col-md-5">
+            <table class="table table-striped table-bordered">
+                <tbody>
+                    <tr>
+                        <th>Datesanction</th>
+                        <td>{{ entity.datesanction|date("d/m/Y")  }}</td>
+                    </tr>
+                    <tr>
+                        <th>Sanction</th>
+                        <td>{{ entity.libsanction }}</td>
+                    </tr>
+                    <tr>
+                        <th>Motif</th>
+                        <td>{{ entity.motif }}</td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-5">
+            <h4>Description </h4>
+            {{ entity.explication|raw }}
+        </div>
+    </div>
+    <a class="btn btn-success "  href="{{ path('sanction', { 'idemp': entity.employe.id }) }}">
+        Retour
+    </a>
+
+{% endblock %}

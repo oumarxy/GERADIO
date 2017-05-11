@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Ge Radio {% endblock %} ~ App </title>
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+{% trans_default_domain 'FOSUserBundle' %}
+{% block stylesheets %}
+    <style>
+        @charset "utf-8";
+        /* CSS Document */
+
+        body {
+            font-family: Helvetica;
+            margin:0 auto;
+            min-height:100%;
+            margin-top: -14%;
+            background: #E0F7FA;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+
+        .nav {
+
+            margin: 0 auto;
+            margin-top: 25%;
+            margin-left: 35%;
+            width: 300px;
+            height: 250px;
+            background: #fff;
+            border-radius: 5px; 
+            text-align: center;
+            padding-top: 1px;
+            box-shadow: 0 0 10px rgba(0,0,0, .5);
+
+        }
+
+        .username, .password {
+            border: 1px solid #a6a6a6;
+            width: 230px;
+            height: 40px;
+            border-radius: 3px;
+            margin-top: 25px;
+            padding-left: 9px;
+            color: #6c6c6c;
+            background: #fcfcfc;
+            outline: none;
+        }
+
+        .password:hover, .username:hover {
+            box-shadow: 0 0 10px rgba(178,34,34, 1); 
+            border: 1px #b22222	 solid ;
+        }
+
+        .password:focus, .username:focus, .button:focus, .button:hover:focus{
+            box-shadow: 0 0 10px rgba(178,34,34, 1); 
+            border: 1px #b22222	 solid ;
+        }
+
+        .button {
+            color:#fff;
+            font-size:20px;
+            border: 1px solid #a6a6a6;
+            width: 243px;
+            height: 48px;
+            border-radius: 5px;
+            margin-top: 15px;
+            margin-right: 6px;
+            outline: none;
+            background: #009688;
+        }
+        
+    </style>
+
+{% endblock %}
+</head>
+<body>
+
+    {% block fos_user_content %}
+        <div class="nav">
+            <form  action="{{ path("fos_user_security_check") }}" method="post">
+                {% if error %}
+                    <div class="text-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% endif %}
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+
+                <input type="text" class="username"  id="username" name="_username" placeholder="Utilisateur" required="required" />
+                <input type="password" class="password" id="password" name="_password" required="required" placeholder="Mot de passe" />
+                <input type="submit" onclick="" value="Se Connecter" class="button" />
+
+            </form>
+        </div>
+    {% endblock fos_user_content %}
+</body>

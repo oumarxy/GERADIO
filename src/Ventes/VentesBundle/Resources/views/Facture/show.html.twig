@@ -1,0 +1,149 @@
+{% extends "VentesBundle::layout_ventes.html.twig" %}
+
+{% block container_ventes %}
+    {% if entity.etat == 'Proforma' %}
+        <h1>Proforma</h1>
+    {% else %}
+        <h1>Facture</h1>
+    {% endif %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th>Numero</th>
+                            <td>{{ entity.numero }}</td>
+                        </tr>
+                        <tr>
+                            <th>Type de facture</th>
+                            <td>{{ entity.typeFacture }}</td>
+                        </tr>
+                        <tr>
+                            <th>Total facture</th>
+                            <td>{{ entity.totalFacture|number_format(0,',',' ') }}</td>
+                        </tr>
+
+                        <tr>
+                            <th>Date facture</th>
+                            <td>{{ entity.dateFacture|date('d/m/Y') }}</td>
+                        </tr>
+                        <tr>
+                            <th>Etat</th>
+                            <td><span class="label label-info">{{ entity.etat }}</span></td>
+                        </tr>
+
+                    </tbody>
+                </table>
+
+                {%if entity.utilisateur is not null %} 
+                    <div class="col-md-12">
+                        <div class="">Dernière modification effectuée par: {{entity.utilisateur.username|capitalize}}</div>
+                        <div class="">Le {{entity.lastUpdate|date('d/m/Y')}} à {{entity.lastUpdate|date('H:i:s')}}</div>
+                    </div>
+                {% endif %} 
+
+                <div class="clearfix"></div>
+                <br />
+                <br />
+                <div class="container">
+
+                    <a class="btn btn-primary" href="{{ path('facture_impression', {'idfacture': entity.id}) }}" target="_blank">
+                        <i class="fa fa-file-pdf-o"></i>  Générer PDF
+                    </a>
+                    {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_COMPTABLE')  %}
+
+                        {% if entity.etat == 'En cours' %}
+                            <a class="btn btn-primary" href="{{ path('encaissement_new', {'idfacture': entity.id}) }}">
+                                Encaisser
+                            </a>
+                        {% else %}
+                            <a class="btn btn-default">Encaisser</a>                        
+                        {% endif %}
+                    {% endif %}
+
+                </div>
+
+            </div>
+            <div class="col-md-8">
+
+                {% set totalHT = 0 %}
+                {% set totalTTC = 0 %}
+                {% set totalRemiseOuReduction = 0   %}
+
+                {% if entity.detailsProduits|length != 0 %}
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr >
+                                <th>Réf</th>
+                                <th>Produit</th>
+                                <th>PU</th>
+                                <th>Quantité</th>
+                                <th>Montant</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for prod in entity.detailsProduits %}
+                                <tr class="even pointer">
+                                    <td>{{ prod.refProd }}</td>
+                                    <td>{{ prod.libelle }}</td>
+                                    <td align="right">{{ prod.prixHT |number_format(0,',',' ')}}</td>
+                                    <td>{{ prod.quantite }}</td>
+                                    <td align="right">{{(prod.prixHT * prod.quantite )|number_format(0,',',' ')}} </td>
+                                </tr>
+                                {% set totalHT = totalHT + (prod.prixHT * prod.quantite) %}
+                                {#% set totalTTC = totalTTC + (entity.prixproduit * tableauQte[entity.id])*18/100 %#}
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
+                {% else %}
+                    Aucune facture...
+                {% endif %}
+                <div class="row">
+                    <div class="col-md-11">
+                        {% if entity.detailsProduits|length != 0 %}
+                            <dl class="dl-horizontal pull-right">
+
+                                <dt>Total HT :</dt>
+                                <dd align="right">{{ totalHT |number_format(0,',',' ')}}</dd>
+
+                                {% if  entity.remise > 0%}
+
+                                    <dt>Rémise ({{ entity.remise }} %) :</dt>
+                                    {% set totalRemiseOuReduction = totalRemiseOuReduction+(totalHT * entity.remise/100) %}
+                                    <dd align="right"> - {{ totalRemiseOuReduction |number_format(0,',',' ')}}</dd>
+
+                                    <dt>Total après réduction :</dt>
+                                    <dd align="right">{{ (totalHT - totalRemiseOuReduction)|number_format(0,',',' ')  }}</dd>
+
+                                {% elseif  entity.reduction > 0%}
+
+                                    <dt>Reduction :</dt>
+                                    <dd align="right"> - {{ entity.reduction |number_format(0,',',' ')}}</dd>
+                                    {% set totalRemiseOuReduction = totalRemiseOuReduction + entity.reduction %}
+
+                                    <dt>Total après réduction :</dt>
+                                    <dd align="right">{{ (totalHT - totalRemiseOuReduction)|number_format(0,',',' ')  }}</dd>
+                                {% endif %}
+
+
+
+                                <dt>TVA ({{ entity.tvafacture }} %) : </dt>
+                                <dd align="right">{{ (( totalHT - totalRemiseOuReduction) * entity.tvafacture/100)|number_format(0,',',' ') }}</dd>
+                                <dt></dt>
+                                <dd> <div class="divider"></div></dd>
+                                <dt>Total TTC:</dt>
+                                <dd align="right">{{ entity.totalFacture|number_format(0,',',' ') }}</dd>
+                            </dl>
+                            <div class="clearfix"></div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+        </div>                    
+
+    </div>
+
+{% endblock %}

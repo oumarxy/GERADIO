@@ -1,0 +1,31 @@
+{% extends 'GestionBundle::layout_gestion.html.twig' %}
+
+{% block container_gestion %} 
+    <h1>Fonction</h1>
+ <div class="row">
+        <div class="col-md-4">
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Libfonction</th>
+                <td>{{ entity.libfonction }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</div>
+
+        <a class="btn btn-success btn-xs" href="{{ path('fonction') }}">
+            Retour
+        </a>
+ 
+        <a class="btn btn-success btn-xs" href="{{ path('fonction_edit', { 'id': entity.id }) }}">
+            Modifier
+        </a>
+
+	{{ form(delete_form) }}
+{% endblock %}

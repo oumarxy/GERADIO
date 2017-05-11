@@ -1,0 +1,39 @@
+{% extends 'GestionBundle::layout_gestion.html.twig' %}
+
+{% block container_gestion %}
+    <h1>Composante salaire</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Composante</th>
+                <th>Type</th>
+                <th>Taux</th>
+                <th>Montant</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('salairecompo_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.composante }}</td>
+                <td>{{ entity.type }}</td>
+                <td>{{ entity.taux }}</td>
+                <td>{{ entity.montant }}</td>
+                <td>
+                        <a href="{{ path('salairecompo_edit', { 'id': entity.id }) }}">modifier</a>
+                    
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        
+            <a href="{{ path('salairecompo_new') }}">
+               Nouveau
+            </a>
+        
+    {% endblock %}

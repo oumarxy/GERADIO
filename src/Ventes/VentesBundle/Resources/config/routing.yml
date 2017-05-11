@@ -1,0 +1,49 @@
+ventes_operation:
+    resource: "@VentesBundle/Resources/config/routing/operation.yml"
+    prefix:   /operation
+
+ventes_apporteur:
+    resource: "@VentesBundle/Resources/config/routing/apporteur.yml"
+    prefix:   /apporteur
+
+ventes_detailsproduits:
+    resource: "@VentesBundle/Resources/config/routing/detailsproduits.yml"
+    prefix:   /detailsproduits
+
+ventes_facture:
+    resource: "@VentesBundle/Resources/config/routing/facture.yml"
+    prefix:   /factures
+
+ventes_encaissement:
+    resource: "@VentesBundle/Resources/config/routing/encaissement.yml"
+    prefix:   /encaissement
+
+ventes_categorieproduit:
+    resource: "@VentesBundle/Resources/config/routing/categorieproduit.yml"
+    prefix:   /categorieproduit
+
+ventes_produit:
+    resource: "@VentesBundle/Resources/config/routing/produit.yml"
+    prefix:   /produit
+
+ventes_categorieclient:
+    resource: "@VentesBundle/Resources/config/routing/categorieclient.yml"
+    prefix:   /categorieclient
+
+ventes_client:
+    resource: "@VentesBundle/Resources/config/routing/client.yml"
+    prefix:   /client
+
+ventes_home:
+    resource: "@VentesBundle/Resources/config/routing/home.yml"
+    prefix:   /home
+
+ventes_accueil:
+    path:     /
+    defaults: { _controller: VentesBundle:Home:accueil }
+
+infos_produit:
+    pattern: /infosproduits/{id}
+    defaults: {_controller: VentesBundle:DetailsProduits:infosProd}
+    options:
+        expose: true

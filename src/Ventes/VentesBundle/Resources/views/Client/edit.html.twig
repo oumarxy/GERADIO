@@ -1,0 +1,35 @@
+{% extends "VentesBundle::layout_ventes.html.twig" %}
+
+{% block container_ventes %}    
+     <div class="row">
+            <div class="col-md-5 col-md-offset-1" >
+             
+    <h3>Modification client</h3>
+            </div>
+        </div>
+    <div class="row">
+        {{ form_start(edit_form) }}
+        <div class="col-md-5 col-md-offset-1" >
+            {{ form_row(edit_form.categorie) }}
+            {{ form_row(edit_form.nom) }}
+            {{ form_row(edit_form.adresse) }}
+            {{ form_row(edit_form.telephone) }}
+            {{ form_row(edit_form.mail) }}
+            {{ form_row(edit_form.siteweb) }}
+            {{ form_row(edit_form.activite) }}
+        </div>
+        <div class="col-md-5">
+            {{ form_rest(edit_form) }}
+        </div>
+        {{ form_widget(edit_form._token) }} 
+        {{ form_end(edit_form, {'label':'Modifier', 'render_rest': false})}}
+    </div>
+
+ <div class="row">
+            <div class="col-md-5 col-md-offset-1" >
+                <a class="btn btn-primary"  href="{{ path('client') }}">
+                    Retour
+                </a>
+            </div>
+        </div>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends 'GestionBundle::layout_gestion.html.twig' %}
+
+{% block container_gestion %} 
+    <h3>Nouvel employé</h3>
+
+    <div class="row">
+        {{ form_start(form) }}
+        <div class="col-md-4">
+            {{ form_row(form.civilitemp, {'label':'Civilité'}) }}
+            {{ form_row(form.nomemp, {'label':'Nom employé'}) }}
+            {{ form_row(form.prenomemp, {'label':'Prénom employé'}) }}
+            {{ form_row(form.matemp, {'label':'Matricule employé'}) }}
+            {{ form_row(form.genremp, {'label':'Genre employé'}) }}
+            {{ form_row(form.natemp, {'label':'Nationalité employé'}) }}
+            {{ form_row(form.dobemp, {'label':'Date de naissance'}) }}
+            {{ form_row(form.lieuemp, {'label':'Lieu  de naissance'}) }}
+
+        </div>
+        <div class="col-md-4">
+            {{ form_row(form.statuemp, {'label':'Status matrimonial'}) }} 
+            {{ form_row(form.adressemp, {'label':'Adresse'}) }} 
+            {{ form_row(form.nbreftemp, {'label':'Nombre enfants'}) }}
+            {{ form_row(form.fonction) }}	 
+            {{ form_row(form.etude) }}
+            {{ form_row(form.grade) }}
+            {{ form_row(form.service)}}
+            {{ form_row(form.salbase, {'label':'Salaire de base'})}}
+
+        </div>
+
+        <div class="col-md-4">
+            {{ form_row(form.celemp, {'label':'Cellulaire employé'}) }}
+            {{ form_row(form.telemp, {'label':'Telephone employé'}) }}
+            {{ form_row(form.emailemp, {'label':'Email employé'}) }}
+            {{ form_row(form.perscont, {'label':'Personne à contacter'}) }}
+            {{ form_row(form.telpers, {'label':'Téléphone'}) }}
+            {{ form_row(form.celpers, {'label':'Cellulaire'}) }}
+            {{ form_row(form.filiationemp, {'label':'Affiliation'}) }}
+            {{ form_row(form.file, {'label':'Photo de profil (100 * 100)'}) }} 
+            {{ form_widget(form._token) }}
+            {{ form_row(form.submit) }}
+
+        </div>
+        {{ form_end(form) }}
+    </div>
+    <div class="divider"></div>
+    <a class="btn btn-primary" href="{{ path('employe') }}">
+        Retour
+    </a>
+
+
+{% endblock %}

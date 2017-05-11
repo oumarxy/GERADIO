@@ -1,0 +1,36 @@
+absence:
+    path:    /{idemp}/
+    defaults: { _controller: "GestionBundle:Absence:index" }
+    requirements:
+        idemp: \d+
+
+absence_show:
+    path:     /{id}/show
+    defaults: { _controller: "GestionBundle:Absence:show" }
+
+absence_new:
+    path:    /{idemp}/new
+    defaults: { _controller: "GestionBundle:Absence:new" }
+    requirements:
+        idemp: \d+
+
+absence_create:
+    path:     /{idemp}/create
+    defaults: { _controller: "GestionBundle:Absence:create" }
+    methods:  POST
+    requirements:
+        idemp: \d+
+
+absence_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "GestionBundle:Absence:edit" }
+
+absence_update:
+    path:     /{id}/update
+    defaults: { _controller: "GestionBundle:Absence:update" }
+    methods:  [POST, PUT]
+
+absence_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "GestionBundle:Absence:delete" }
+    methods:  [POST, DELETE]

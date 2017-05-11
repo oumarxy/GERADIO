@@ -1,0 +1,87 @@
+{% extends 'GestionBundle::layout_gestion.html.twig' %}
+
+{% block container_gestion %} 
+    <h3>Infos employé</h3>
+
+    <div class="row">
+        <div class="col-md-3 col-sm-3 col-xs-3 profile_left">
+
+            <div class="profile_img">
+
+                <!-- end of image cropping -->
+                <div id="crop-avatar" >
+                    <!-- Current avatar -->
+                    <div class="avatar-view"  title="Change the avatar">
+                         {% if entity.path is not null %}
+                                <img class="img-circle" src="{{ asset('uploads/profiles/' ~ entity.path)}}"  width="200" height="200">
+                            {% else %}
+                                <img class="img-circle" src="{{ asset('uploads/profiles/default.png')}}"  width="200" height="200">
+                            {% endif %}
+                    </div>
+                </div>
+                <!-- end of image cropping -->
+
+            </div>
+            <h3>{{ entity.nomemp }} {{ entity.prenomemp }}</h3>
+            <h4> {{ entity.grade}} -  {{ entity.fonction}} </h4>
+            <a href="{{ path('employe_edit', { 'id': entity.id }) }}" class="btn btn-success"><i class="fa fa-edit m-right-xs"></i> Modifier</a>
+
+            <a href="{{ path('employe') }}" class="btn btn-success"><i class="fa fa-cancel m-right-xs"></i> Retour</a> 
+
+        </div>
+
+        <div class="col-md-6 col-sm-6 col-xs-12 profile_right">
+            <table class="table table-striped table-bordered">
+                <tbody>
+                    <tr>
+                        <th>Matricule</th>
+                        <td>{{ entity.matemp }}</td>
+                    </tr>
+                    <tr>
+                        <th>Sexe</th>
+                        <td>{{ entity.genremp }}</td>
+                    </tr>
+                    <tr>
+                        <th>Date et lieu de naissance</th>
+                        <td>{{ entity.dobemp |date("d/m/Y")}} à {{ entity.lieuemp }}</td>
+                    </tr>
+                    <tr>
+                        <th>Situation matrimonial</th>
+                        <td>{{ entity.statuemp }} - {{ entity.nbreftemp }} enfant</td>
+                    </tr>
+                    <tr>
+                        <th>Niveau d'etude</th>
+                        <td>{{ entity.etude }}</td>
+                    </tr>
+                    <tr>
+                        <th>telephone</th>
+                        <td>{{ entity.telpers }}</td>
+                    </tr>
+                    <tr>
+                        <th>Cellulaire</th>
+                        <td>{{ entity.celemp }}</td>
+                    </tr>
+                    <tr>
+                        <th>Email</th>
+                        <td> {{ entity.emailemp }}</td>
+                    </tr>
+                    <tr>
+                        <th>Adresse</th>
+                        <td>{{ entity.adressemp }}</td>
+                    </tr>
+                    <tr>
+                        <th>Personne à contacter</th>
+                        <td>{{ entity.perscont }} - {{ entity.celpers }} - {{ entity.filiationemp }}</td>
+                    </tr>
+
+
+                </tbody>
+            </table>
+
+        </div>
+
+
+    </div>
+
+
+{% endblock %}

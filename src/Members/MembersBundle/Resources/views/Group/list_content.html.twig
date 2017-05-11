@@ -1,0 +1,14 @@
+<div class="panel">
+    <ul>
+    {% for group in groups %}
+        <li><a href="{{ path('fos_user_group_show', {'groupName': group.getName()} ) }}">{{ group.getName() }}</a></li>
+    {% endfor %}
+    </ul>
+</div>
+
+
+<div class="panel">
+	<a href="{{path('fos_user_group_new')}}"><i class="fa fa-circle-o text-red"></i> 
+		<span>Créer un groupe</span>
+	</a>
+</div>

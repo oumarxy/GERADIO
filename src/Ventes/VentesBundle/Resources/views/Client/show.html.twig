@@ -1,0 +1,237 @@
+{% extends "VentesBundle::layout_ventes.html.twig" %}
+
+{% block container_ventes %} 
+    <h4>Client</h4>
+    <div class="row">
+        <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="x_panel tile fixed_height_320 overflow_hidden">
+                <div class="x_title">
+                    <h2>Infos client</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <table class="table table-striped table-hover">
+                        <tbody>
+                            <tr>
+                                <th>Catégorie</th>
+                                <td>{{ entity.categorie }}</td>
+                            </tr>
+                            <tr>
+                                <th>Numéro</th>
+                                <td>{{ entity.numero }}</td>
+                            </tr>
+                            <tr>
+                                <th>Nom</th>
+                                <td>{{ entity.nom }}</td>
+                            </tr>
+                            <tr>
+                                <th>Adresse</th>
+                                <td>{{ entity.adresse }}</td>
+                            </tr>
+                            <tr>
+                                <th>Téléphone</th>
+                                <td>{{ entity.telephone }}</td>
+                            </tr>
+                            <tr>
+                                <th>Mail</th>
+                                <td>{{ entity.mail }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="x_panel tile fixed_height_320 overflow_hidden">
+                <div class="x_title">
+                    <h2>Infos client</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <table class="table table-striped table-hover table-bordered">
+                        <tbody>
+                            <tr>
+                                <th>Site web</th>
+                                <td>{{ entity.siteweb }}</td>
+                            </tr>
+                            <tr>
+                                <th>Activité</th>
+                                <td>{{ entity.activite }}</td>
+                            </tr>
+                            <tr>
+                                <th>Personne ressource</th>
+                                <td>{{ entity.personneressource }}</td>
+                            </tr>
+                            <tr>
+                                <th>Fonction personne ressource</th>
+                                <td>{{ entity.fonctionpersonres }}</td>
+                            </tr>
+                            <tr>
+                                <th>Téléphone</th>
+                                <td>{{ entity.telpersres }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="x_panel tile fixed_height_320 overflow_hidden">
+                <div class="x_title">
+                    <h2>Infos apporteur</h2>
+                    <div class="clearfix"></div>
+                </div>
+                {% if entity.apporteur is not null %}
+                    <div class="x_content">
+                        <table class="table table-striped table-hover">
+                            <tbody>
+                                {% if entity.apporteur.nomapporteur is not null %}
+                                    <tr>
+                                        <th>Nom Apporteur</th>
+                                        <td>{{ entity.apporteur.nomapporteur }}</td>
+                                    </tr>
+                                {% endif %}
+                                {% if entity.apporteur.prenomapporteur is not null %}
+                                    <tr>
+                                        <th>Prenom Apporteur</th>
+                                        <td>{{ entity.apporteur.prenomapporteur }}</td>
+                                    </tr>
+                                {% endif %}
+                                {% if entity.apporteur.telephone is not null %}
+                                    <tr>
+                                        <th>téléphone Apporteur</th>
+                                        <td>{{ entity.apporteur.telephone }}</td>
+                                    </tr>
+                                {% endif %}
+                                {% if entity.apporteur.email is not null %}
+                                    <tr>
+                                        <th>Email Apporteur</th>
+                                        <td>{{ entity.apporteur.email }}</td>
+                                    </tr>
+                                {% endif %}
+                                {% if entity.apporteur.fonction is not null %}
+                                    <tr>
+                                        <th>Fonction Apporteur</th>
+                                        <td>{{ entity.apporteur.fonction }}</td>
+                                    </tr>
+                                {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% endif  %}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="col-md-6">
+            <div class="x_panel tile">
+                <div class="x_title">
+                    <h2>Liste des actions</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <a class="btn btn-primary" href="{{ path('client') }}">
+                        Retour
+                    </a>
+                    <a class="btn btn-success" href="{{ path('client_edit', { 'id': entity.id }) }}">
+                        Modifier
+                    </a>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <form method="post" action="{{path('fact_etat_compte', {idcli: entity.id} )}}">
+                <table class="table table-striped table-hover">
+                    <tbody>
+                        <tr>
+                            <th> 
+                                <label class="control-label required" for="datedebut">Date Début</label>
+                            </th>
+                            <td> 
+                                <input type="text" id="datedebut" name="datedebut" required="required"
+                                       class="form-control datetimepicker" />
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th>  
+                                <label class="control-label required" for="datefin">Date Fin</label>
+                            </th>
+                            <td>
+                                <input type="text" id="datefin" name="datefin" required="required"
+                                       class="form-control datetimepicker" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <th> 
+                            </th>
+                            <td>
+                                <input type="submit" value="Générer" class="btn btn-primary form-control" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+    </div>
+    <div class="row">&nbsp;</div>
+    <h4>Factures</h4>
+    <div class="row">
+        <div class="col-md-12">
+            <table  class="liste panel table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Numero</th>
+                        <th>Date</th>
+                        <th>Montant facture</th>
+                        <th>Reste à payer</th> 
+                        <th width="23%">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for facture in factures %}
+                        {% if facture.etat != 'Proforma' %}
+                            {% set total_deja_encaisse = 0 %}0
+                            <tr>
+                                <td>{{ facture.numero }}</td>
+                                <td>{% if facture.dateFacture %}{{ facture.dateFacture|date('d/m/Y') }}{% endif %}</td>
+                                <td>{{ facture.totalFacture|number_format(0,',',' ') }}</td>
+                                {% for encaissement in facture.encaissement %}
+                                    {% set total_deja_encaisse = total_deja_encaisse + encaissement.montant  %}
+                                {% endfor %}
+                                <td>{{(facture.totalFacture - total_deja_encaisse)|number_format(0,',',' ')  }}</td>
+                                <td>
+                                    {% if (facture.totalFacture - total_deja_encaisse) >0 %}
+                                        {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_COMPTABLE')  %}
+                                            <a class="btn btn-primary btn-xs " href="{{ path('encaissement_new', { 'idfacture': facture.id }) }}">Encaisser</a>
+                                        {% endif %}
+                                    {% else %}
+                                        <a class="btn btn-default btn-xs" >Encaisser</a>                        
+                                    {% endif %}
+                                    <a class="btn btn-info btn-xs" href="{{ path('encaissement', {'idfacture': facture.id }) }}">
+                                        Paiements
+                                    </a>
+                                    <a class="btn btn-info btn-xs" href="{{ path('facture_show', {'id': facture.id }) }}">
+                                        Détails
+                                    </a>
+
+                                </td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+
+
+        </div>
+    </div>
+
+
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends 'MembersBundle::layout_member.html.twig' %}
+
+{% block container_member %} 
+    <div class="row">
+        <div class="col-md-5 col-md-offset-2">
+            {% include "FOSUserBundle:Resetting:request_content.html.twig" %}
+        </div>
+    </div>
+{% endblock container_member %}

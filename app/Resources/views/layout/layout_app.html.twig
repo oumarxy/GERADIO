@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container body">
+
+        <div class="main_container">
+
+            {# la sidebar #}
+            {% include "::sections_app/main_sidebar.html.twig" %} 
+
+            {# le header  #}
+            {% include "::sections_app/header.html.twig" %}
+
+
+            {# le contenu  #}
+            <!-- page content -->
+            <div class="right_col " role="main">
+                {% block container_app%}	{% endblock container_app %}
+
+                {# le footer #}
+                {% include "::sections_app/footer.html.twig" %}
+
+            </div>
+
+        </div>
+
+                
+                
+                
+
+
+ 
+ {% endblock %}
+
+
+                

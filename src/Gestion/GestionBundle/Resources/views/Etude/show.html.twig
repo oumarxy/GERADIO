@@ -1,0 +1,27 @@
+{% extends 'GestionBundle::layout_gestion.html.twig' %}
+
+{% block container_gestion %} 
+    <h1>Etude</h1>
+ <div class="row">
+        <div class="col-md-4">
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Libetude</th>
+                <td>{{ entity.libetude }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</div>
+
+        <a class="btn btn-success btn-xs" href="{{ path('etude') }}">
+            Retour
+        </a>
+
+        <a class="btn btn-success btn-xs" href="{{ path('etude_edit', { 'id': entity.id }) }}">
+            Modifier
+        </a>
+
+{{ form(delete_form) }}
+{% endblock %}

@@ -1,0 +1,72 @@
+{% extends "VentesBundle::layout_ventes.html.twig" %}
+
+{% block container_ventes %}
+     <h2>Jounal périodique</h2>
+                   
+     <div class="row">
+
+        <div class="col-md-6">
+            <div class="x_panel tile">
+                <div class="x_title">
+                    <h2>Génération rapide du journal</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <h4>
+                        Veuillez précisez la période souhaitée en donnant la date début et la date fin.
+                    </h4>
+                    <p>
+                        Pour Générer le journal d'aujourd'hui, indiquez comme date debut la date d'aujourd'hui 
+                        et comme date de fin la date d'aujourd'hui également.
+                    </p>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="x_panel tile">
+                <div class="x_title">
+                    <h2>Journal de caisse sur une période</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <form method="post" action="{{path('operation_journal_print')}}">
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th> 
+                            <label class="control-label required" for="datedebut">Date Début</label>
+                        </th>
+                        <td> 
+                            <input type="text" id="datedebut" name="datedebut" required="required"
+                                    class="form-control datetimepicker" />
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>  
+                            <label class="control-label required" for="datefin">Date Fin</label>
+                        </th>
+                        <td>
+                            <input type="text" id="datefin" name="datefin" required="required"
+                                    class="form-control datetimepicker" />
+                        </td>
+                    </tr>
+                    <tr>
+                         <th> 
+                         </th>
+                        <td>
+                            <button type="submit" class="btn btn-primary form-control" ><i class="fa fa-file-pdf-o"></i> Générer</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            </form>
+      
+                </div>
+            </div>
+        </div>
+    
+        </div>
+   
+{% endblock %}

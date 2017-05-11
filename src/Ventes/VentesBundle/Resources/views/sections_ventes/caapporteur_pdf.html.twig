@@ -1,0 +1,171 @@
+
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <style>
+
+            body {
+                height: 297mm;/*297*/
+                width: 210mm;
+            }
+            .invoice-box{
+                max-width:800px;
+                margin-left: 50px;
+                padding:30px;
+                font-size:16px;
+                line-height:24px;
+                font-family:'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+                color:#555;
+                height: 842px;
+            }
+
+            .invoice-box table{
+                width:100%;
+                line-height:inherit;
+                text-align:left;
+            }
+            td{
+                font-size: 13px !important;
+            }
+
+            .invoice-box table td{
+                padding:5px;
+                vertical-align:top;
+            }
+
+            .invoice-box table tr td:nth-child(2){
+                text-align:left;
+            }
+
+            .invoice-box table tr.top table td{
+                padding-bottom:20px;
+            }
+
+            .invoice-box table tr.top table td.title{
+                font-size:45px;
+                line-height:45px;
+                color:#333;
+            }
+
+            .invoice-box table tr.information table td{
+                padding-bottom:40px;
+            }
+
+            .invoice-box table tr.heading td{
+                background:#ccc;
+                border-bottom:1px solid #ddd;
+                font-weight:bold;
+            }
+
+            .invoice-box table tr.details td{
+                padding-bottom:20px;
+            }
+
+            .invoice-box table tr.item td{
+                border-bottom:1px solid #eee;
+            }
+
+            .invoice-box table tr.item.last td{
+                border-bottom:none;
+            }
+
+            .invoice-box table tr.total td:nth-child(2){
+                border-top:2px solid #eee;
+                font-weight:bold;
+            }
+            tr{
+                border-bottom: 2px solid #eee !important;
+            }
+
+            @media only screen and (max-width: 600px) {
+                .invoice-box table tr.top table td{
+                    width:100%;
+                    display:block;
+                    text-align:center;
+                }
+
+                .invoice-box table tr.information table td{
+                    width:100%;
+                    display:block;
+                    text-align:center;
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="invoice-box">
+            <table cellpadding="0" cellspacing="0">
+                <tr class="top">
+                    <td colspan="5">
+                        <table>
+                            <tr>
+                                <td class="title">
+                                    {#<img src="{{ asset('design/dist/img/bosoft.png') }}" style="width:130%; max-width:130px;">#}
+                                </td>
+
+                                <td style="text-align: right">
+                                    Abidjan, le {{'now'|date('d/m/Y') }}
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="5" style="text-transform: capitalize" align="left"><strong>Objet : &nbsp;</strong>Chiffre d'affaire</td>
+                </tr>
+                 <tr>
+                    <td colspan="5" style="text-transform: capitalize" align="left"><strong>Période : &nbsp;</strong> du {{datedebut|date('d/m/Y')}} au {{datefin|date('d/m/Y')}}</td>
+                </tr>
+                <tr>
+                    <td width="100%">
+                         <table class="table table-striped table-bordered">
+                <tbody>
+                    <tr class="toatl">
+                        <th>Nom apporteur</th>
+                        <td>{{ entity.nomapporteur }}</td>
+                    </tr>
+                    <tr class="toatl">
+                        <th>Prénom apporteur</th>
+                        <td>{{ entity.prenomapporteur }}</td>
+                    </tr>
+                    <tr class="toatl">
+                        <th>Téléphone</th>
+                        <td>{{ entity.telephone }}</td>
+                    </tr>
+                    <tr class="toatl">
+                        <th>Email</th>
+                        <td>{{ entity.email }}</td>
+                    </tr>
+                    <tr class="toatl">
+                        <th>Fonction</th>
+                        <td>{{ entity.fonction }}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+                    </td>
+                </tr>
+
+                <tr class="vide">
+                    <td colspan="5"> &nbsp; </td>
+                </tr>
+                <tr class="total">
+                    <td colspan="5"><strong>Portant sur la somme totale de :</strong>
+                       
+                                <span style="text-transform: uppercase;font-size: 16px">{{ caApporteur}} Francs CFA</span> 
+                            
+                    </td>
+                </tr>
+                <tr>
+                    
+                    <td colspan="5" style="font-size: 10px"><u><strong>LA COMPTABILITE</strong></u></td>
+                </tr>
+
+            </table>
+        </div>
+    </body>
+</html>

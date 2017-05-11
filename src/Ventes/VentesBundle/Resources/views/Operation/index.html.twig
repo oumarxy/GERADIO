@@ -1,0 +1,44 @@
+{% extends "VentesBundle::layout_ventes.html.twig" %}
+
+{% block container_ventes %}
+    <h4>Liste operations</h4>
+
+    <table class="table table-hover table-striped liste">
+        <thead>
+            <tr>
+                <th>Flux</th>
+                <th>Nature</th>
+                <th>Nom</th>
+                <th>Fonction</th>
+                <th>Téléphone</th>
+                <th>Montant</th>
+                <th>Date</th>
+                <th>Motif</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entity in entities %}
+                <tr>
+                    <td>{{ entity.flux }}</td>
+                    <td>{{ entity.nature}}</td>
+                    <td>{{ entity.nom }}</td>
+                    <td>{{ entity.fonctionpersonres }}</td>
+                    <td>{{ entity.telephone }}</td>
+                    <td>{{ entity.montant }}</td>
+                    <td>{% if entity.dateOperation %}{{ entity.dateOperation|date('Y-m-d H:i:s') }}{% endif %}</td>
+                    <td>{{ entity.libelle }}</td>
+                    <td>
+                        <a class="btn btn-primary btn-xs" href="{{ path('operation_show', { 'id': entity.id }) }}"> <i class="fa fa-eye"></i> Voir </a>&nbsp;
+                        <a class="btn btn-success btn-xs" href="{{ path('operation_edit', { 'id': entity.id }) }}"> <i class="fa fa-edit"></i>  Modifier</a>
+
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="btn btn-primary" href="{{ path('operation_new') }}">
+        Nouvel opération
+    </a>
+{% endblock %}

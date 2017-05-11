@@ -1,0 +1,55 @@
+{% extends "VentesBundle::layout_ventes.html.twig" %}
+
+{% block container_ventes %} 
+    <h3>Générer Proforma</h3>
+
+    <div class="row">
+        <div class="col-md-12">
+
+            <table class="table table-hover table-striped liste">
+                <thead>
+                    <tr>
+                        <th> 
+                            Catégorie
+                        </th>
+                        <th> 
+                            Client
+                        </th>
+
+                        <th> 
+                            Adresse
+                        </th>
+
+                        <th> 
+                            Téléphone
+                        </th>
+                        <th> 
+                            Action
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for entity in entities %}
+                        <tr>
+                            <td>{{ entity.categorie.libelle }}</td>
+                            <td>{{ entity.nom }}</td>
+                            <td>{{ entity.adresse }}</td>
+                            <td>{{ entity.telephone }}</td>
+                            <td>    <a class="btn btn-primary btn-xs" href="{{ path('facture_new', { 'idclient': entity.id, 'etat': 'proforma'}) }}">
+                                    <i class="fa fa-cog">  </i> Proforma</a>
+
+                                <a class="btn btn-info btn-xs" href="{{ path('facture', { 'idcli': entity.id, 'etat': 'proforma'}) }}">
+                                    <i class="fa fa-info">  </i> Détails</a>
+
+                            </td>
+                        </tr>
+
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+
+{% endblock %}

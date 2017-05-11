@@ -1,0 +1,205 @@
+<?php
+
+namespace Ventes\VentesBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * OptionsProduit
+ *
+ * @ORM\Table()
+ * @ORM\Entity(repositoryClass="Ventes\VentesBundle\Repository\OptionsProduitRepository")
+ */
+class OptionsProduit {
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="refOption", type="string", length=100)
+     */
+    private $refOption;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="libelle", type="string", length=255)
+     */
+    private $libelle;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="prixHT", type="float")
+     */
+    private $prixHT;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="lastupdate", type="datetime")
+     */
+    private $lastUpdate;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Ventes\VentesBundle\Entity\Produit", inversedBy="optionsProduit", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $produit;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Members\MembersBundle\Entity\AccountMember", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $utilisateur;
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId() {
+        return $this->id;
+    }
+
+    /**
+     * Set refOption
+     *
+     * @param string $refOption
+     * @return OptionsProduit
+     */
+    public function setRefOption($refOption) {
+        $this->refOption = $refOption;
+
+        return $this;
+    }
+
+    /**
+     * Get refOption
+     *
+     * @return string
+     */
+    public function getRefOption() {
+        return $this->refOption;
+    }
+
+    /**
+     * Set libelle
+     *
+     * @param string $libelle
+     * @return OptionsProduit
+     */
+    public function setLibelle($libelle) {
+        $this->libelle = $libelle;
+
+        return $this;
+    }
+
+    /**
+     * Get libelle
+     *
+     * @return string 
+     */
+    public function getLibelle() {
+        return $this->libelle;
+    }
+
+    /**
+     * Set prixHT
+     *
+     * @param float $prixHT
+     * @return OptionsProduit
+     */
+    public function setPrixHT($prixHT) {
+        $this->prixHT = $prixHT;
+
+        return $this;
+    }
+
+    /**
+     * Get prixHT
+     *
+     * @return float 
+     */
+    public function getPrixHT() {
+        return $this->prixHT;
+    }
+
+    /**
+     * Set produit
+     *
+     * @param \Ventes\VentesBundle\Entity\Produit $produit
+     * @return OptionsProduit
+     */
+    public function setProduit(\Ventes\VentesBundle\Entity\Produit $produit) {
+        $this->produit = $produit;
+
+        return $this;
+    }
+
+    /**
+     * Get produit
+     *
+     * @return \Ventes\VentesBundle\Entity\Produit 
+     */
+    public function getProduit() {
+        return $this->produit;
+    }
+
+    public function __toString() {
+        return $this->getLibelle();
+    }
+
+    /**
+     * Set utilisateur
+     *
+     * @param \Members\MembersBundle\Entity\AccountMember $utilisateur
+     * @return OptionsProduit
+     */
+    public function setUtilisateur(\Members\MembersBundle\Entity\AccountMember $utilisateur = null) {
+        $this->utilisateur = $utilisateur;
+
+        return $this;
+    }
+
+    /**
+     * Get utilisateur
+     *
+     * @return \Members\MembersBundle\Entity\AccountMember 
+     */
+    public function getUtilisateur() {
+        return $this->utilisateur;
+    }
+
+
+    /**
+     * Set lastUpdate
+     *
+     * @param \DateTime $lastUpdate
+     * @return OptionsProduit
+     */
+    public function setLastUpdate($lastUpdate)
+    {
+        $this->lastUpdate = $lastUpdate;
+
+        return $this;
+    }
+
+    /**
+     * Get lastUpdate
+     *
+     * @return \DateTime 
+     */
+    public function getLastUpdate()
+    {
+        return $this->lastUpdate;
+    }
+}
